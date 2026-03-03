@@ -4,11 +4,45 @@
 
 ## Quick Start
 
+### 1. Install dependencies
+
 ```bash
 pnpm install
+```
+
+### 2. Set up the database
+
+1. Create a free PostgreSQL database at [neon.tech](https://neon.tech)
+2. Copy the connection string from your Neon dashboard
+
+### 3. Configure environment
+
+```bash
 cp apps/web/.env.example apps/web/.env.local
+```
+
+Edit `apps/web/.env.local` and set:
+
+```env
+DATABASE_URL=postgresql://user:pass@ep-xxx.neon.tech/neondb?sslmode=require
+BETTER_AUTH_SECRET=<run: openssl rand -base64 32>
+```
+
+### 4. Run database migrations
+
+```bash
+cd packages/db
+pnpm generate
+pnpm migrate
+```
+
+### 5. Start developing
+
+```bash
 pnpm dev
 ```
+
+Open [http://localhost:3000](http://localhost:3000) — login and registration work out of the box.
 
 ## Stack
 
