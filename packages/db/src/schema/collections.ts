@@ -8,14 +8,14 @@ import {
   index,
   unique,
 } from 'drizzle-orm/pg-core';
-import { users } from './users';
+import { user } from './auth';
 
 export const collections = pgTable(
   'collections',
   {
     id: uuid('id').defaultRandom().primaryKey(),
-    userId: uuid('user_id')
-      .references(() => users.id, { onDelete: 'cascade' })
+    userId: text('user_id')
+      .references(() => user.id, { onDelete: 'cascade' })
       .notNull(),
     name: varchar('name', { length: 255 }).notNull(),
     slug: varchar('slug', { length: 255 }).notNull(),
@@ -31,8 +31,8 @@ export const notes = pgTable(
   'notes',
   {
     id: uuid('id').defaultRandom().primaryKey(),
-    userId: uuid('user_id')
-      .references(() => users.id, { onDelete: 'cascade' })
+    userId: text('user_id')
+      .references(() => user.id, { onDelete: 'cascade' })
       .notNull(),
     collectionId: uuid('collection_id').references(() => collections.id, {
       onDelete: 'cascade',

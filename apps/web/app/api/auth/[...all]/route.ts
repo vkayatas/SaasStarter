@@ -1,11 +1,6 @@
-// TODO: Configure Better-Auth catch-all handler
-// import { auth } from '@/lib/auth';
-// export const { GET, POST } = auth.handler;
+import { toNextJsHandler } from 'better-auth/next-js';
+import { auth } from '@/lib/auth';
 
-export async function GET() {
-  return Response.json({ message: 'Auth endpoint — configure Better-Auth here' });
-}
+export const dynamic = 'force-dynamic';
 
-export async function POST() {
-  return Response.json({ message: 'Auth endpoint — configure Better-Auth here' });
-}
+export const { GET, POST } = toNextJsHandler(auth);

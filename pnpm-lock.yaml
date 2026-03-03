@@ -23,6 +23,9 @@ importers:
       '@saas/api-client':
         specifier: workspace:*
         version: link:../../packages/api-client
+      '@saas/db':
+        specifier: workspace:*
+        version: link:../../packages/db
       '@saas/shared':
         specifier: workspace:*
         version: link:../../packages/shared

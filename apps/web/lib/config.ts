@@ -4,6 +4,8 @@ const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'staging', 'production']).default('development'),
   DATABASE_URL: z.string().url(),
   AUTH_SECRET: z.string().min(32, 'AUTH_SECRET must be at least 32 characters'),
+  NEXT_PUBLIC_APP_URL: z.string().url().default('http://localhost:3000'),
+  BETTER_AUTH_URL: z.string().url().optional(),
   CORS_ORIGINS: z.string().transform((s) => s.split(',')),
   ADMIN_EMAILS: z
     .string()
@@ -16,7 +18,6 @@ const envSchema = z.object({
 // In development, provide defaults for optional services
 const env = {
   ...process.env,
-  // Ensure required vars have fallbacks in dev for initial setup
   DATABASE_URL: process.env.DATABASE_URL ?? 'postgresql://localhost:5432/saas_dev',
   AUTH_SECRET:
     process.env.AUTH_SECRET ?? 'dev_secret_key_for_development_only_32chars!',

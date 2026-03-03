@@ -2,17 +2,32 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import { signIn } from '@/lib/auth-client';
 
 export default function LoginPage() {
   const t = useTranslations('auth');
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    // TODO: Integrate Better-Auth sign-in
-    console.log('Login:', { email, password });
+    setError('');
+    setLoading(true);
+    const { error: err } = await signIn.email(
+      { email, password },
+      { onSuccess: () => router.push('/dashboard') },
+    );
+    if (err) setError(err.message ?? 'Sign-in failed');
+    setLoading(false);
+  }
+
+  async function handleOAuth(provider: 'google' | 'github') {
+    await signIn.social({ provider, callbackURL: '/dashboard' });
   }
 
   return (
@@ -23,12 +38,26 @@ export default function LoginPage() {
           <p className="mt-2 text-sm text-muted-foreground">{t('signInDescription')}</p>
         </div>
 
+        {error && (
+          <p className="rounded-md bg-destructive/10 px-3 py-2 text-sm text-destructive">
+            {error}
+          </p>
+        )}
+
         {/* OAuth Buttons */}
         <div className="space-y-2">
-          <button className="flex w-full items-center justify-center gap-2 rounded-md border px-4 py-2 hover:bg-accent">
+          <button
+            type="button"
+            onClick={() => handleOAuth('google')}
+            className="flex w-full items-center justify-center gap-2 rounded-md border px-4 py-2 hover:bg-accent"
+          >
             {t('continueWithGoogle')}
           </button>
-          <button className="flex w-full items-center justify-center gap-2 rounded-md border px-4 py-2 hover:bg-accent">
+          <button
+            type="button"
+            onClick={() => handleOAuth('github')}
+            className="flex w-full items-center justify-center gap-2 rounded-md border px-4 py-2 hover:bg-accent"
+          >
             {t('continueWithGitHub')}
           </button>
         </div>
@@ -72,9 +101,10 @@ export default function LoginPage() {
           </div>
           <button
             type="submit"
-            className="w-full rounded-md bg-primary py-2 text-sm text-primary-foreground hover:bg-primary/90"
+            disabled={loading}
+            className="w-full rounded-md bg-primary py-2 text-sm text-primary-foreground hover:bg-primary/90 disabled:opacity-50"
           >
-            {t('signIn')}
+            {loading ? '...' : t('signIn')}
           </button>
         </form>
 

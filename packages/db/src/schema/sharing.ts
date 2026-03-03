@@ -2,11 +2,12 @@ import {
   pgTable,
   uuid,
   varchar,
+  text,
   boolean,
   timestamp,
   unique,
 } from 'drizzle-orm/pg-core';
-import { users } from './users';
+import { user } from './auth';
 
 export const resourceShares = pgTable(
   'resource_shares',
@@ -14,8 +15,8 @@ export const resourceShares = pgTable(
     id: uuid('id').defaultRandom().primaryKey(),
     resourceType: varchar('resource_type', { length: 50 }).notNull(),
     resourceId: uuid('resource_id').notNull(),
-    ownerId: uuid('owner_id')
-      .references(() => users.id, { onDelete: 'cascade' })
+    ownerId: text('owner_id')
+      .references(() => user.id, { onDelete: 'cascade' })
       .notNull(),
     slug: varchar('slug', { length: 64 }).notNull().unique(),
     accessLevel: varchar('access_level', { length: 20 }).default('public').notNull(),

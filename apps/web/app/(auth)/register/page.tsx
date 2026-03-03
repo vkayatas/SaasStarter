@@ -2,18 +2,33 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import { signUp, signIn } from '@/lib/auth-client';
 
 export default function RegisterPage() {
   const t = useTranslations('auth');
+  const router = useRouter();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    // TODO: Integrate Better-Auth sign-up
-    console.log('Register:', { name, email, password });
+    setError('');
+    setLoading(true);
+    const { error: err } = await signUp.email(
+      { name, email, password },
+      { onSuccess: () => router.push('/dashboard') },
+    );
+    if (err) setError(err.message ?? 'Sign-up failed');
+    setLoading(false);
+  }
+
+  async function handleOAuth(provider: 'google' | 'github') {
+    await signIn.social({ provider, callbackURL: '/dashboard' });
   }
 
   return (
@@ -24,12 +39,26 @@ export default function RegisterPage() {
           <p className="mt-2 text-sm text-muted-foreground">{t('signUpDescription')}</p>
         </div>
 
+        {error && (
+          <p className="rounded-md bg-destructive/10 px-3 py-2 text-sm text-destructive">
+            {error}
+          </p>
+        )}
+
         {/* OAuth Buttons */}
         <div className="space-y-2">
-          <button className="flex w-full items-center justify-center gap-2 rounded-md border px-4 py-2 hover:bg-accent">
+          <button
+            type="button"
+            onClick={() => handleOAuth('google')}
+            className="flex w-full items-center justify-center gap-2 rounded-md border px-4 py-2 hover:bg-accent"
+          >
             {t('continueWithGoogle')}
           </button>
-          <button className="flex w-full items-center justify-center gap-2 rounded-md border px-4 py-2 hover:bg-accent">
+          <button
+            type="button"
+            onClick={() => handleOAuth('github')}
+            className="flex w-full items-center justify-center gap-2 rounded-md border px-4 py-2 hover:bg-accent"
+          >
             {t('continueWithGitHub')}
           </button>
         </div>
@@ -87,9 +116,10 @@ export default function RegisterPage() {
           </div>
           <button
             type="submit"
-            className="w-full rounded-md bg-primary py-2 text-sm text-primary-foreground hover:bg-primary/90"
+            disabled={loading}
+            className="w-full rounded-md bg-primary py-2 text-sm text-primary-foreground hover:bg-primary/90 disabled:opacity-50"
           >
-            {t('signUp')}
+            {loading ? '...' : t('signUp')}
           </button>
         </form>
 
