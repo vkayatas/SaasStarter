@@ -1,0 +1,47 @@
+name: Maintenance
+
+on:
+  schedule:
+    # Weekly: Monday 6 AM UTC — dependency updates
+    - cron: '0 6 * * 1'
+    # Daily: 2 AM UTC — security scan
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+jobs:
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm audit --audit-level=high
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # dependency-update:
+  #   name: Update Dependencies
+  #   runs-on: ubuntu-latest
+  #   if: github.event.schedule == '0 6 * * 1'
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: pnpm/action-setup@v4
+  #     - uses: actions/setup-node@v4
+  #       with:
+  #         node-version: 22
+  #         cache: pnpm
+  #     - run: pnpm install
+  #     - run: pnpm update --latest --recursive
+  #     - name: Create PR
+  #       uses: peter-evans/create-pull-request@v6
+  #       with:
+  #         commit-message: "chore: update dependencies"
+  #         title: "chore: weekly dependency update"
+  #         branch: chore/dependency-update
+  #         delete-branch: true

@@ -1,0 +1,59 @@
+{
+  "marketing": {
+    "pricing": "Preise",
+    "signIn": "Anmelden",
+    "heroTitle": "Baue dein SaaS schneller als je zuvor",
+    "heroDescription": "Ein moderner, plattformübergreifender Starter mit allem, was du brauchst. TypeScript überall, schöne UI, bereit für Produktion.",
+    "getStarted": "Loslegen",
+    "viewPricing": "Preise ansehen"
+  },
+  "auth": {
+    "signIn": "Anmelden",
+    "signUp": "Registrieren",
+    "signInDescription": "Melde dich bei deinem Konto an, um fortzufahren.",
+    "signUpDescription": "Erstelle ein Konto, um loszulegen.",
+    "continueWithGoogle": "Weiter mit Google",
+    "continueWithGitHub": "Weiter mit GitHub",
+    "orContinueWith": "oder weiter mit",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "name": "Name",
+    "noAccount": "Noch kein Konto?",
+    "haveAccount": "Bereits ein Konto?"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "home": "Startseite",
+    "collections": "Sammlungen",
+    "settings": "Einstellungen",
+    "welcome": "Willkommen zurück",
+    "welcomeDescription": "Hier ist eine Übersicht deiner Aktivitäten."
+  },
+  "pricing": {
+    "title": "Einfache, transparente Preise",
+    "description": "Wähle den Plan, der zu dir passt.",
+    "free": {
+      "name": "Kostenlos",
+      "description": "Für Einzelpersonen, die anfangen."
+    },
+    "pro": {
+      "name": "Pro",
+      "description": "Für Profis und kleine Teams."
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "price": "Individuell",
+      "description": "Für große Organisationen mit individuellen Anforderungen."
+    }
+  },
+  "common": {
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "create": "Erstellen",
+    "loading": "Wird geladen...",
+    "error": "Etwas ist schiefgelaufen",
+    "retry": "Erneut versuchen"
+  }
+}

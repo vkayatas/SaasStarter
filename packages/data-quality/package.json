@@ -1,0 +1,21 @@
+{
+  "name": "@saas/data-quality",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint . --max-warnings 0",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@saas/db": "workspace:*",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@saas/typescript-config": "workspace:*",
+    "typescript": "^5.7.0"
+  }
+}

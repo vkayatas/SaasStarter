@@ -1,0 +1,27 @@
+{
+  "name": "@saas/db",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./schema": "./src/schema/index.ts",
+    "./client": "./src/client.ts"
+  },
+  "scripts": {
+    "generate": "drizzle-kit generate",
+    "migrate": "drizzle-kit migrate",
+    "studio": "drizzle-kit studio",
+    "lint": "eslint . --max-warnings 0",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^0.10.0",
+    "drizzle-orm": "^0.41.0"
+  },
+  "devDependencies": {
+    "@saas/typescript-config": "workspace:*",
+    "drizzle-kit": "^0.31.0",
+    "typescript": "^5.7.0"
+  }
+}

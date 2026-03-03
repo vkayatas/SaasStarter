@@ -1,0 +1,43 @@
+name: Deploy — Production
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+
+      # Vercel auto-deploys from main — this is for additional steps
+      # - name: Run Migrations
+      #   run: pnpm db:migrate
+      #   env:
+      #     DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+      - name: Health Check
+        run: |
+          sleep 30
+          curl -f ${{ vars.PRODUCTION_URL }}/api/v1/health || exit 1
+        continue-on-error: true
+
+      # - name: Notify
+      #   uses: slackapi/slack-github-action@v1
+      #   with:
+      #     payload: |
+      #       {"text": "Deployed ${{ github.sha }} to production"}

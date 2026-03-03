@@ -1,0 +1,59 @@
+{
+  "marketing": {
+    "pricing": "Pricing",
+    "signIn": "Sign In",
+    "heroTitle": "Build your SaaS faster than ever",
+    "heroDescription": "A modern, cross-platform starter with everything you need. TypeScript everywhere, beautiful UI, ready for production.",
+    "getStarted": "Get Started",
+    "viewPricing": "View Pricing"
+  },
+  "auth": {
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "signInDescription": "Sign in to your account to continue.",
+    "signUpDescription": "Create an account to get started.",
+    "continueWithGoogle": "Continue with Google",
+    "continueWithGitHub": "Continue with GitHub",
+    "orContinueWith": "or continue with",
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "noAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "home": "Home",
+    "collections": "Collections",
+    "settings": "Settings",
+    "welcome": "Welcome back",
+    "welcomeDescription": "Here's an overview of your activity."
+  },
+  "pricing": {
+    "title": "Simple, transparent pricing",
+    "description": "Choose the plan that's right for you.",
+    "free": {
+      "name": "Free",
+      "description": "For individuals getting started."
+    },
+    "pro": {
+      "name": "Pro",
+      "description": "For professionals and small teams."
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "price": "Custom",
+      "description": "For large organizations with custom needs."
+    }
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Try again"
+  }
+}

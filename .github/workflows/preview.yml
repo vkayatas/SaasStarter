@@ -1,0 +1,26 @@
+name: Preview Deployment
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  preview:
+    name: Preview Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Vercel handles preview deployments automatically for PRs
+      # This workflow can add additional steps like:
+      # - Creating a Neon database branch
+      # - Running migrations on the preview branch
+      # - Posting the preview URL as a PR comment
+
+      - name: Comment Preview URL
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // Vercel will auto-comment with the preview URL
+            // Add additional info here if needed
+            console.log('Preview deployment triggered for PR #' + context.issue.number);

@@ -1,0 +1,13 @@
+{
+  "name": "@saas/tailwind-config",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./base": "./base.js"
+  },
+  "devDependencies": {
+    "tailwindcss": "^4.0.0",
+    "tailwindcss-animate": "^1.0.7"
+  }
+}

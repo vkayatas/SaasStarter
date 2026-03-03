@@ -1,0 +1,14 @@
+{
+  "extends": "../../tooling/typescript/nextjs.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"],
+      "@saas/ui/*": ["../../packages/ui/src/*"],
+      "@saas/shared/*": ["../../packages/shared/src/*"],
+      "@saas/api-client/*": ["../../packages/api-client/src/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}
