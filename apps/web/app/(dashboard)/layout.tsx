@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl';
+import { UserMenu } from '@/components/user-menu';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const t = useTranslations('dashboard');
@@ -38,7 +39,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         <header className="flex h-14 items-center justify-between border-b px-6">
           <h1 className="text-lg font-semibold">{t('title')}</h1>
           <div className="flex items-center gap-4">
-            {/* TODO: Dark mode toggle, user menu */}
+            <UserMenu />
           </div>
         </header>
 
