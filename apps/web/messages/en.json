@@ -115,6 +115,8 @@
     "create": "Create",
     "loading": "Loading...",
     "error": "Something went wrong",
-    "retry": "Try again"
+    "retry": "Try again",
+    "theme": "Toggle theme",
+    "language": "Switch language"
   }
 }

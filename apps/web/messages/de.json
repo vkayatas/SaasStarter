@@ -115,6 +115,8 @@
     "create": "Erstellen",
     "loading": "Wird geladen...",
     "error": "Etwas ist schiefgelaufen",
-    "retry": "Erneut versuchen"
+    "retry": "Erneut versuchen",
+    "theme": "Design wechseln",
+    "language": "Sprache wechseln"
   }
 }
