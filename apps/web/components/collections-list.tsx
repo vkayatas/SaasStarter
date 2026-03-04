@@ -17,7 +17,7 @@ interface Collection {
 
 async function fetchCollections(): Promise<Collection[]> {
   const res = await fetch('/api/v1/collections');
-  if (!res.ok) throw new Error('Failed to fetch collections');
+  if (!res.ok) throw new Error('fetchError');
   const json = await res.json();
   return json.data;
 }
@@ -30,14 +30,14 @@ async function createCollectionApi(data: { name: string }) {
   });
   if (!res.ok) {
     const err = await res.json();
-    throw new Error(err.error ?? 'Failed to create collection');
+    throw new Error(err.error ?? 'createError');
   }
   return res.json();
 }
 
 async function deleteCollectionApi(id: string) {
   const res = await fetch(`/api/v1/collections/${id}`, { method: 'DELETE' });
-  if (!res.ok) throw new Error('Failed to delete collection');
+  if (!res.ok) throw new Error('deleteError');
   return res.json();
 }
 
@@ -47,7 +47,7 @@ async function renameCollectionApi(id: string, name: string) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ name }),
   });
-  if (!res.ok) throw new Error('Failed to rename collection');
+  if (!res.ok) throw new Error('renameError');
   return res.json();
 }
 
@@ -71,7 +71,7 @@ export function CollectionsList() {
       setNewName('');
       toast.success(t('created'));
     },
-    onError: (err: Error) => toast.error(err.message),
+    onError: (err: Error) => toast.error(t.has(err.message as any) ? t(err.message as any) : err.message),
   });
 
   const deleteMutation = useMutation({
@@ -80,7 +80,7 @@ export function CollectionsList() {
       queryClient.invalidateQueries({ queryKey: ['collections'] });
       toast.success(t('deleted'));
     },
-    onError: (err: Error) => toast.error(err.message),
+    onError: (err: Error) => toast.error(t.has(err.message as any) ? t(err.message as any) : err.message),
   });
 
   const renameMutation = useMutation({
@@ -91,7 +91,7 @@ export function CollectionsList() {
       setEditingId(null);
       toast.success(t('renamed'));
     },
-    onError: (err: Error) => toast.error(err.message),
+    onError: (err: Error) => toast.error(t.has(err.message as any) ? t(err.message as any) : err.message),
   });
 
   function handleCreate(e: React.FormEvent) {

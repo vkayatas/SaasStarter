@@ -18,7 +18,7 @@ interface Note {
 
 async function fetchNotes(collectionId: string): Promise<Note[]> {
   const res = await fetch(`/api/v1/collections/${collectionId}/notes`);
-  if (!res.ok) throw new Error('Failed to fetch notes');
+  if (!res.ok) throw new Error('fetchError');
   const json = await res.json();
   return json.data;
 }
@@ -31,7 +31,7 @@ async function createNoteApi(collectionId: string, data: { content: string; tags
   });
   if (!res.ok) {
     const err = await res.json();
-    throw new Error(err.error ?? 'Failed to create note');
+    throw new Error(err.error ?? 'createError');
   }
   return res.json();
 }
@@ -46,7 +46,7 @@ async function updateNoteApi(
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
   });
-  if (!res.ok) throw new Error('Failed to update note');
+  if (!res.ok) throw new Error('updateError');
   return res.json();
 }
 
@@ -54,7 +54,7 @@ async function deleteNoteApi(collectionId: string, noteId: string) {
   const res = await fetch(`/api/v1/collections/${collectionId}/notes/${noteId}`, {
     method: 'DELETE',
   });
-  if (!res.ok) throw new Error('Failed to delete note');
+  if (!res.ok) throw new Error('deleteError');
   return res.json();
 }
 
@@ -82,7 +82,7 @@ export function NotesList({ collectionId, collectionName }: { collectionId: stri
       setNewTags('');
       toast.success(t('created'));
     },
-    onError: (err: Error) => toast.error(err.message),
+    onError: (err: Error) => toast.error(t.has(err.message as any) ? t(err.message as any) : err.message),
   });
 
   const updateMutation = useMutation({
@@ -93,7 +93,7 @@ export function NotesList({ collectionId, collectionName }: { collectionId: stri
       setEditingId(null);
       toast.success(t('updated'));
     },
-    onError: (err: Error) => toast.error(err.message),
+    onError: (err: Error) => toast.error(t.has(err.message as any) ? t(err.message as any) : err.message),
   });
 
   const deleteMutation = useMutation({
@@ -102,7 +102,7 @@ export function NotesList({ collectionId, collectionName }: { collectionId: stri
       queryClient.invalidateQueries({ queryKey: ['notes', collectionId] });
       toast.success(t('deleted'));
     },
-    onError: (err: Error) => toast.error(err.message),
+    onError: (err: Error) => toast.error(t.has(err.message as any) ? t(err.message as any) : err.message),
   });
 
   function parseTags(input: string): string[] {

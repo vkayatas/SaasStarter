@@ -12,14 +12,14 @@ export default function PricingPage() {
         {/* Free Tier */}
         <div className="flex flex-col gap-4 rounded-lg border p-6">
           <h3 className="text-lg font-semibold">{t('free.name')}</h3>
-          <p className="text-3xl font-bold">$0</p>
+          <p className="text-3xl font-bold">{t('free.price')}</p>
           <p className="text-sm text-muted-foreground">{t('free.description')}</p>
         </div>
 
         {/* Pro Tier */}
         <div className="flex flex-col gap-4 rounded-lg border-2 border-primary p-6">
           <h3 className="text-lg font-semibold">{t('pro.name')}</h3>
-          <p className="text-3xl font-bold">$20</p>
+          <p className="text-3xl font-bold">{t('pro.price')}</p>
           <p className="text-sm text-muted-foreground">{t('pro.description')}</p>
         </div>
 

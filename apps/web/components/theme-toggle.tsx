@@ -20,12 +20,18 @@ export function ThemeToggle() {
   const next = themes[(themes.indexOf(current) + 1) % themes.length];
   const Icon = icons[current];
 
+  const themeLabels: Record<string, string> = {
+    light: t('themeLight'),
+    dark: t('themeDark'),
+    system: t('themeSystem'),
+  };
+
   return (
     <button
       onClick={() => setTheme(next)}
       className="flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground hover:bg-accent hover:text-foreground"
       aria-label={t('theme')}
-      title={current}
+      title={themeLabels[current] ?? current}
     >
       <Icon className="h-4 w-4" />
     </button>

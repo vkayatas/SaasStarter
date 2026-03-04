@@ -1,11 +1,17 @@
 {
+  "metadata": {
+    "title": "SaaS Starter",
+    "titleTemplate": "%s | SaaS Starter",
+    "description": "Eine moderne, plattformübergreifende SaaS-Anwendung."
+  },
   "marketing": {
     "pricing": "Preise",
     "signIn": "Anmelden",
     "heroTitle": "Baue dein SaaS schneller als je zuvor",
     "heroDescription": "Ein moderner, plattformübergreifender Starter mit allem, was du brauchst. TypeScript überall, schöne UI, bereit für Produktion.",
     "getStarted": "Loslegen",
-    "viewPricing": "Preise ansehen"
+    "viewPricing": "Preise ansehen",
+    "allRightsReserved": "Alle Rechte vorbehalten."
   },
   "auth": {
     "signIn": "Anmelden",
@@ -51,6 +57,9 @@
     "empty": "Noch keine Sammlungen. Erstelle eine, um loszulegen.",
     "deleteConfirm": "Diese Sammlung löschen?",
     "fetchError": "Sammlungen konnten nicht geladen werden. Bitte aktualisiere die Seite.",
+    "createError": "Sammlung konnte nicht erstellt werden",
+    "deleteError": "Sammlung konnte nicht gelöscht werden",
+    "renameError": "Sammlung konnte nicht umbenannt werden",
     "rename": "Umbenennen",
     "updated": "Aktualisiert"
   },
@@ -67,17 +76,23 @@
     "save": "Speichern",
     "cancel": "Abbrechen",
     "fetchError": "Notizen konnten nicht geladen werden. Bitte aktualisiere die Seite.",
+    "createError": "Notiz konnte nicht erstellt werden",
+    "updateError": "Notiz konnte nicht aktualisiert werden",
+    "deleteError": "Notiz konnte nicht gelöscht werden",
     "saving": "Speichern…"
   },
   "pricing": {
     "title": "Einfache, transparente Preise",
     "description": "Wähle den Plan, der zu dir passt.",
+    "perMonth": "/Monat",
     "free": {
       "name": "Kostenlos",
+      "price": "0 \u20ac",
       "description": "Für Einzelpersonen, die anfangen."
     },
     "pro": {
       "name": "Pro",
+      "price": "20 \u20ac",
       "description": "Für Profis und kleine Teams."
     },
     "enterprise": {
@@ -116,6 +131,8 @@
     "deleteAccountConfirm": "Bist du sicher, dass du dein Konto löschen möchtest? Dies kann nicht rückgängig gemacht werden.",
     "accountDeleted": "Konto gelöscht",
     "unknownDevice": "Unbekanntes Gerät",
+    "unknownBrowser": "Browser",
+    "browserOnOs": "{browser} auf {os}",
     "unknownOS": "Unbekanntes Betriebssystem",
     "unknownIP": "Unbekannte IP"
   },
@@ -129,6 +146,9 @@
     "error": "Etwas ist schiefgelaufen",
     "retry": "Erneut versuchen",
     "theme": "Design wechseln",
+    "themeLight": "Hell",
+    "themeDark": "Dunkel",
+    "themeSystem": "System",
     "language": "Sprache wechseln",
     "signOut": "Abmelden",
     "signedOut": "Abgemeldet",
@@ -139,8 +159,12 @@
     "expandSidebar": "Seitenleiste erweitern",
     "collapseSidebar": "Seitenleiste einklappen",
     "openMenu": "Menü öffnen",
+    "breadcrumb": "Brotkrümelnavigation",
     "notFoundTitle": "404",
     "notFoundDescription": "Die gesuchte Seite existiert nicht.",
     "goHome": "Zur Startseite"
+  },
+  "blog": {
+    "placeholder": "Blogbeitrag-Inhalt folgt hier."
   }
 }

@@ -19,6 +19,7 @@ export function Breadcrumbs() {
   const tCollections = useTranslations('collections');
   const tSettings = useTranslations('settings');
   const tNotes = useTranslations('notes');
+  const tCommon = useTranslations('common');
 
   const translators: Record<string, (key: string) => string> = {
     dashboard: tDashboard,
@@ -45,7 +46,7 @@ export function Breadcrumbs() {
   });
 
   return (
-    <nav aria-label="Breadcrumb" className="flex items-center gap-1 text-sm text-muted-foreground">
+    <nav aria-label={tCommon('breadcrumb')} className="flex items-center gap-1 text-sm text-muted-foreground">
       {crumbs.map((crumb, i) => (
         <span key={crumb.href} className="flex items-center gap-1">
           {i > 0 && <ChevronRight className="h-3 w-3" />}

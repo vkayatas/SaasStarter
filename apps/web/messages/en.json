@@ -1,11 +1,17 @@
 {
+  "metadata": {
+    "title": "SaaS Starter",
+    "titleTemplate": "%s | SaaS Starter",
+    "description": "A modern, cross-platform SaaS application."
+  },
   "marketing": {
     "pricing": "Pricing",
     "signIn": "Sign In",
     "heroTitle": "Build your SaaS faster than ever",
     "heroDescription": "A modern, cross-platform starter with everything you need. TypeScript everywhere, beautiful UI, ready for production.",
     "getStarted": "Get Started",
-    "viewPricing": "View Pricing"
+    "viewPricing": "View Pricing",
+    "allRightsReserved": "All rights reserved."
   },
   "auth": {
     "signIn": "Sign In",
@@ -51,6 +57,9 @@
     "empty": "No collections yet. Create one to get started.",
     "deleteConfirm": "Delete this collection?",
     "fetchError": "Failed to load collections. Please try refreshing.",
+    "createError": "Failed to create collection",
+    "deleteError": "Failed to delete collection",
+    "renameError": "Failed to rename collection",
     "rename": "Rename",
     "updated": "Updated"
   },
@@ -67,17 +76,23 @@
     "save": "Save",
     "cancel": "Cancel",
     "fetchError": "Failed to load notes. Please try refreshing.",
+    "createError": "Failed to create note",
+    "updateError": "Failed to update note",
+    "deleteError": "Failed to delete note",
     "saving": "Saving…"
   },
   "pricing": {
     "title": "Simple, transparent pricing",
     "description": "Choose the plan that's right for you.",
+    "perMonth": "/mo",
     "free": {
       "name": "Free",
+      "price": "$0",
       "description": "For individuals getting started."
     },
     "pro": {
       "name": "Pro",
+      "price": "$20",
       "description": "For professionals and small teams."
     },
     "enterprise": {
@@ -116,6 +131,8 @@
     "deleteAccountConfirm": "Are you sure you want to delete your account? This cannot be undone.",
     "accountDeleted": "Account deleted",
     "unknownDevice": "Unknown device",
+    "unknownBrowser": "Browser",
+    "browserOnOs": "{browser} on {os}",
     "unknownOS": "Unknown OS",
     "unknownIP": "Unknown IP"
   },
@@ -129,6 +146,9 @@
     "error": "Something went wrong",
     "retry": "Try again",
     "theme": "Toggle theme",
+    "themeLight": "Light",
+    "themeDark": "Dark",
+    "themeSystem": "System",
     "language": "Switch language",
     "signOut": "Sign Out",
     "signedOut": "Signed out",
@@ -139,8 +159,12 @@
     "expandSidebar": "Expand sidebar",
     "collapseSidebar": "Collapse sidebar",
     "openMenu": "Open menu",
+    "breadcrumb": "Breadcrumb",
     "notFoundTitle": "404",
     "notFoundDescription": "The page you're looking for doesn't exist.",
     "goHome": "Go home"
+  },
+  "blog": {
+    "placeholder": "Blog post content goes here."
   }
 }

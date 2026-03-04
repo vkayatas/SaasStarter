@@ -3,12 +3,13 @@ import { useTranslations } from 'next-intl';
 
 export default function MarketingLayout({ children }: { children: React.ReactNode }) {
   const t = useTranslations('marketing');
+  const tc = useTranslations('common');
 
   return (
     <div className="flex min-h-screen flex-col">
       <header className="flex items-center justify-between px-6 py-4">
         <Link href="/" className="text-xl font-bold">
-          SaaS Starter
+          {tc('appName')}
         </Link>
         <nav className="flex items-center gap-4">
           <Link href="/pricing" className="text-muted-foreground hover:text-foreground">
@@ -26,7 +27,7 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
       <main className="flex flex-1 flex-col">{children}</main>
 
       <footer className="border-t px-6 py-8 text-center text-sm text-muted-foreground">
-        &copy; {new Date().getFullYear()} SaaS Starter. All rights reserved.
+        &copy; {new Date().getFullYear()} {tc('appName')}. {t('allRightsReserved')}
       </footer>
     </div>
   );

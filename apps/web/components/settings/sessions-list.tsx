@@ -31,11 +31,17 @@ function getDeviceIcon(userAgent?: string | null) {
   return <Monitor className="h-4 w-4" />;
 }
 
-function parseUserAgent(userAgent?: string | null, unknownDevice?: string, unknownOS?: string): string {
-  if (!userAgent) return unknownDevice ?? 'Unknown device';
+function parseUserAgent(
+  userAgent: string | null | undefined,
+  unknownDevice: string,
+  unknownBrowser: string,
+  unknownOS: string,
+  formatBrowserOs: (values: { browser: string; os: string }) => string,
+): string {
+  if (!userAgent) return unknownDevice;
   // Simple extraction of browser and OS
   const browsers = ['Firefox', 'Chrome', 'Safari', 'Edge', 'Opera'];
-  const browser = browsers.find((b) => userAgent.includes(b)) ?? 'Browser';
+  const browser = browsers.find((b) => userAgent.includes(b)) ?? unknownBrowser;
   const osPatterns: [RegExp, string][] = [
     [/Windows NT/i, 'Windows'],
     [/Mac OS X/i, 'macOS'],
@@ -43,8 +49,8 @@ function parseUserAgent(userAgent?: string | null, unknownDevice?: string, unkno
     [/Android/i, 'Android'],
     [/iPhone|iPad/i, 'iOS'],
   ];
-  const os = osPatterns.find(([re]) => re.test(userAgent))?.[1] ?? (unknownOS ?? 'Unknown OS');
-  return `${browser} on ${os}`;
+  const os = osPatterns.find(([re]) => re.test(userAgent))?.[1] ?? unknownOS;
+  return formatBrowserOs({ browser, os });
 }
 
 export function SessionsList() {
@@ -146,7 +152,13 @@ export function SessionsList() {
                   </div>
                   <div>
                     <p className="text-sm font-medium">
-                      {parseUserAgent(session.userAgent, t('unknownDevice'), t('unknownOS'))}
+                      {parseUserAgent(
+                        session.userAgent,
+                        t('unknownDevice'),
+                        t('unknownBrowser'),
+                        t('unknownOS'),
+                        (v) => t('browserOnOs', v),
+                      )}
                       {idx === 0 && (
                         <span className="ml-2 rounded bg-primary/10 px-1.5 py-0.5 text-xs text-primary">
                           {t('currentSession')}
