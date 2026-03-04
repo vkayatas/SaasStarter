@@ -27,7 +27,39 @@
     "collections": "Collections",
     "settings": "Settings",
     "welcome": "Welcome back",
-    "welcomeDescription": "Here's an overview of your activity."
+    "welcomeDescription": "Here's an overview of your activity.",
+    "stats": {
+      "collections": "Collections",
+      "notes": "Notes",
+      "shared": "Shared",
+      "recent": "Recent"
+    },
+    "noCollections": "No collections yet",
+    "noCollectionsDescription": "Create your first collection to start organizing.",
+    "goToCollections": "Go to Collections"
+  },
+  "collections": {
+    "title": "Collections",
+    "create": "Create",
+    "newPlaceholder": "New collection name...",
+    "created": "Collection created",
+    "renamed": "Collection renamed",
+    "deleted": "Collection deleted",
+    "empty": "No collections yet. Create one to get started.",
+    "deleteConfirm": "Delete this collection?"
+  },
+  "notes": {
+    "title": "Notes",
+    "addNote": "Add Note",
+    "notePlaceholder": "Write a new note...",
+    "tagsPlaceholder": "Tags (comma-separated)...",
+    "created": "Note created",
+    "updated": "Note updated",
+    "deleted": "Note deleted",
+    "empty": "No notes yet. Create one to get started.",
+    "deleteConfirm": "Delete this note?",
+    "save": "Save",
+    "cancel": "Cancel"
   },
   "pricing": {
     "title": "Simple, transparent pricing",

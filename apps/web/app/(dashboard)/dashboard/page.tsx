@@ -2,6 +2,7 @@ import { getTranslations } from 'next-intl/server';
 import { headers } from 'next/headers';
 import { auth } from '@/lib/auth';
 import { countCollections } from '@/lib/queries/collections';
+import { countNotes } from '@/lib/queries/notes';
 import { FolderOpen, FileText, Share2, Clock } from 'lucide-react';
 
 export const dynamic = 'force-dynamic';
@@ -11,10 +12,11 @@ export default async function DashboardPage() {
 
   const session = await auth.api.getSession({ headers: await headers() });
   const collectionCount = session ? await countCollections(session.user.id) : 0;
+  const noteCount = session ? await countNotes(session.user.id) : 0;
 
   const stats = [
     { label: 'Collections', value: collectionCount, icon: FolderOpen },
-    { label: 'Notes', value: 0, icon: FileText },
+    { label: 'Notes', value: noteCount, icon: FileText },
     { label: 'Shared', value: 0, icon: Share2 },
     { label: 'Recent', value: 0, icon: Clock },
   ];

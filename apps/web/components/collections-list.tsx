@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Plus, Trash2, Pencil, FolderOpen, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
+import Link from 'next/link';
 
 interface Collection {
   id: string;
@@ -183,13 +184,13 @@ export function CollectionsList() {
                   </button>
                 </form>
               ) : (
-                <>
+                <Link href={`/dashboard/collections/${c.id}`} className="block">
                   <h3 className="font-medium">{c.name}</h3>
                   <p className="mt-1 text-xs text-muted-foreground">/{c.slug}</p>
                   <p className="mt-2 text-xs text-muted-foreground">
                     Updated {new Date(c.updatedAt).toLocaleDateString()}
                   </p>
-                </>
+                </Link>
               )}
 
               {/* Action buttons */}

@@ -27,7 +27,39 @@
     "collections": "Sammlungen",
     "settings": "Einstellungen",
     "welcome": "Willkommen zurück",
-    "welcomeDescription": "Hier ist eine Übersicht deiner Aktivitäten."
+    "welcomeDescription": "Hier ist eine Übersicht deiner Aktivitäten.",
+    "stats": {
+      "collections": "Sammlungen",
+      "notes": "Notizen",
+      "shared": "Geteilt",
+      "recent": "Kürzlich"
+    },
+    "noCollections": "Noch keine Sammlungen",
+    "noCollectionsDescription": "Erstelle deine erste Sammlung, um loszulegen.",
+    "goToCollections": "Zu Sammlungen"
+  },
+  "collections": {
+    "title": "Sammlungen",
+    "create": "Erstellen",
+    "newPlaceholder": "Neuer Sammlungsname...",
+    "created": "Sammlung erstellt",
+    "renamed": "Sammlung umbenannt",
+    "deleted": "Sammlung gelöscht",
+    "empty": "Noch keine Sammlungen. Erstelle eine, um loszulegen.",
+    "deleteConfirm": "Diese Sammlung löschen?"
+  },
+  "notes": {
+    "title": "Notizen",
+    "addNote": "Notiz hinzufügen",
+    "notePlaceholder": "Schreibe eine neue Notiz...",
+    "tagsPlaceholder": "Tags (kommagetrennt)...",
+    "created": "Notiz erstellt",
+    "updated": "Notiz aktualisiert",
+    "deleted": "Notiz gelöscht",
+    "empty": "Noch keine Notizen. Erstelle eine, um loszulegen.",
+    "deleteConfirm": "Diese Notiz löschen?",
+    "save": "Speichern",
+    "cancel": "Abbrechen"
   },
   "pricing": {
     "title": "Einfache, transparente Preise",
