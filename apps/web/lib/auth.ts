@@ -54,10 +54,13 @@ export function getAuth() {
   return _auth;
 }
 
-// Proxy to maintain `auth.xxx` usage everywhere
+// Proxy to maintain `auth.xxx` usage everywhere and support auth(request) calls
 export const auth: ReturnType<typeof createAuth> = new Proxy(
-  {} as ReturnType<typeof createAuth>,
-  { get(_, prop) { return Reflect.get(getAuth(), prop); } },
+  function () {} as unknown as ReturnType<typeof createAuth>,
+  {
+    get(_, prop) { return Reflect.get(getAuth(), prop); },
+    apply(_, thisArg, args) { return Reflect.apply(getAuth() as unknown as Function, thisArg, args); },
+  },
 );
 
 export type Session = Awaited<ReturnType<ReturnType<typeof createAuth>['api']['getSession']>>;
