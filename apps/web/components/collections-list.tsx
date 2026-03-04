@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Plus, Trash2, Pencil, FolderOpen, Loader2 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 import Link from 'next/link';
 
@@ -55,6 +56,8 @@ export function CollectionsList() {
   const [newName, setNewName] = useState('');
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editName, setEditName] = useState('');
+  const t = useTranslations('collections');
+  const tc = useTranslations('common');
 
   const { data: collections, isLoading, error } = useQuery({
     queryKey: ['collections'],
@@ -66,7 +69,7 @@ export function CollectionsList() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['collections'] });
       setNewName('');
-      toast.success('Collection created');
+      toast.success(t('created'));
     },
     onError: (err: Error) => toast.error(err.message),
   });
@@ -75,7 +78,7 @@ export function CollectionsList() {
     mutationFn: deleteCollectionApi,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['collections'] });
-      toast.success('Collection deleted');
+      toast.success(t('deleted'));
     },
     onError: (err: Error) => toast.error(err.message),
   });
@@ -86,7 +89,7 @@ export function CollectionsList() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['collections'] });
       setEditingId(null);
-      toast.success('Collection renamed');
+      toast.success(t('renamed'));
     },
     onError: (err: Error) => toast.error(err.message),
   });
@@ -113,7 +116,7 @@ export function CollectionsList() {
   if (error) {
     return (
       <div className="rounded-lg border border-destructive/50 bg-destructive/10 p-4 text-sm text-destructive">
-        Failed to load collections. Please try refreshing.
+        {t('fetchError')}
       </div>
     );
   }
@@ -126,7 +129,7 @@ export function CollectionsList() {
           type="text"
           value={newName}
           onChange={(e) => setNewName(e.target.value)}
-          placeholder="New collection name..."
+          placeholder={t('newPlaceholder')}
           className="flex h-10 flex-1 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
         />
         <button
@@ -139,7 +142,7 @@ export function CollectionsList() {
           ) : (
             <Plus className="h-4 w-4" />
           )}
-          Create
+          {t('create')}
         </button>
       </form>
 
@@ -148,7 +151,7 @@ export function CollectionsList() {
         <div className="flex flex-col items-center gap-2 rounded-lg border border-dashed p-12 text-center">
           <FolderOpen className="h-10 w-10 text-muted-foreground" />
           <p className="text-sm text-muted-foreground">
-            No collections yet. Create one to get started.
+            {t('empty')}
           </p>
         </div>
       ) : (
@@ -180,7 +183,7 @@ export function CollectionsList() {
                     disabled={renameMutation.isPending}
                     className="rounded bg-primary px-2 py-1 text-xs text-primary-foreground"
                   >
-                    Save
+                    {tc('save')}
                   </button>
                 </form>
               ) : (
@@ -188,7 +191,7 @@ export function CollectionsList() {
                   <h3 className="font-medium">{c.name}</h3>
                   <p className="mt-1 text-xs text-muted-foreground">/{c.slug}</p>
                   <p className="mt-2 text-xs text-muted-foreground">
-                    Updated {new Date(c.updatedAt).toLocaleDateString()}
+                    {t('updated')} {new Date(c.updatedAt).toLocaleDateString()}
                   </p>
                 </Link>
               )}
@@ -201,18 +204,18 @@ export function CollectionsList() {
                     setEditName(c.name);
                   }}
                   className="rounded p-1 hover:bg-accent"
-                  title="Rename"
+                  title={t('rename')}
                 >
                   <Pencil className="h-3.5 w-3.5 text-muted-foreground" />
                 </button>
                 <button
                   onClick={() => {
-                    if (confirm('Delete this collection?')) {
+                    if (confirm(t('deleteConfirm'))) {
                       deleteMutation.mutate(c.id);
                     }
                   }}
                   className="rounded p-1 hover:bg-destructive/10"
-                  title="Delete"
+                  title={tc('delete')}
                 >
                   <Trash2 className="h-3.5 w-3.5 text-destructive" />
                 </button>

@@ -3,11 +3,13 @@
 import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSession, signOut } from '@/lib/auth-client';
+import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 export function UserMenu() {
   const { data: session, isPending } = useSession();
   const router = useRouter();
+  const t = useTranslations('common');
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -32,7 +34,7 @@ export function UserMenu() {
         href="/login"
         className="rounded-md bg-primary px-3 py-1.5 text-sm text-primary-foreground hover:bg-primary/90"
       >
-        Sign In
+        {t('signIn')}
       </a>
     );
   }
@@ -48,7 +50,7 @@ export function UserMenu() {
     await signOut({
       fetchOptions: {
         onSuccess: () => {
-          toast.success('Signed out');
+          toast.success(t('signedOut'));
           router.push('/');
           router.refresh();
         },
@@ -61,7 +63,7 @@ export function UserMenu() {
       <button
         onClick={() => setOpen(!open)}
         className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-xs font-medium text-primary-foreground hover:bg-primary/90"
-        aria-label="User menu"
+        aria-label={t('userMenu')}
       >
         {session.user.image ? (
           <img
@@ -85,13 +87,13 @@ export function UserMenu() {
             className="block rounded-sm px-3 py-2 text-sm hover:bg-accent"
             onClick={() => setOpen(false)}
           >
-            Settings
+            {t('settings')}
           </a>
           <button
             onClick={handleSignOut}
             className="w-full rounded-sm px-3 py-2 text-left text-sm text-destructive hover:bg-accent"
           >
-            Sign Out
+            {t('signOut')}
           </button>
         </div>
       )}

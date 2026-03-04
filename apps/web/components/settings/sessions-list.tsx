@@ -31,8 +31,8 @@ function getDeviceIcon(userAgent?: string | null) {
   return <Monitor className="h-4 w-4" />;
 }
 
-function parseUserAgent(userAgent?: string | null): string {
-  if (!userAgent) return 'Unknown device';
+function parseUserAgent(userAgent?: string | null, unknownDevice?: string, unknownOS?: string): string {
+  if (!userAgent) return unknownDevice ?? 'Unknown device';
   // Simple extraction of browser and OS
   const browsers = ['Firefox', 'Chrome', 'Safari', 'Edge', 'Opera'];
   const browser = browsers.find((b) => userAgent.includes(b)) ?? 'Browser';
@@ -43,7 +43,7 @@ function parseUserAgent(userAgent?: string | null): string {
     [/Android/i, 'Android'],
     [/iPhone|iPad/i, 'iOS'],
   ];
-  const os = osPatterns.find(([re]) => re.test(userAgent))?.[1] ?? 'Unknown OS';
+  const os = osPatterns.find(([re]) => re.test(userAgent))?.[1] ?? (unknownOS ?? 'Unknown OS');
   return `${browser} on ${os}`;
 }
 
@@ -146,7 +146,7 @@ export function SessionsList() {
                   </div>
                   <div>
                     <p className="text-sm font-medium">
-                      {parseUserAgent(session.userAgent)}
+                      {parseUserAgent(session.userAgent, t('unknownDevice'), t('unknownOS'))}
                       {idx === 0 && (
                         <span className="ml-2 rounded bg-primary/10 px-1.5 py-0.5 text-xs text-primary">
                           {t('currentSession')}
@@ -154,7 +154,7 @@ export function SessionsList() {
                       )}
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      {session.ipAddress ?? 'Unknown IP'} &middot;{' '}
+                      {session.ipAddress ?? t('unknownIP')} &middot;{' '}
                       {new Date(session.createdAt).toLocaleDateString()}
                     </p>
                   </div>

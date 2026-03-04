@@ -15,10 +15,10 @@ export default async function DashboardPage() {
   const noteCount = session ? await countNotes(session.user.id) : 0;
 
   const stats = [
-    { label: 'Collections', value: collectionCount, icon: FolderOpen },
-    { label: 'Notes', value: noteCount, icon: FileText },
-    { label: 'Shared', value: 0, icon: Share2 },
-    { label: 'Recent', value: 0, icon: Clock },
+    { label: t('stats.collections'), value: collectionCount, icon: FolderOpen },
+    { label: t('stats.notes'), value: noteCount, icon: FileText },
+    { label: t('stats.shared'), value: 0, icon: Share2 },
+    { label: t('stats.recent'), value: 0, icon: Clock },
   ];
 
   return (
@@ -42,15 +42,15 @@ export default async function DashboardPage() {
       {collectionCount === 0 && (
         <div className="rounded-lg border border-dashed p-8 text-center">
           <FolderOpen className="mx-auto h-10 w-10 text-muted-foreground" />
-          <h3 className="mt-4 font-semibold">No collections yet</h3>
+          <h3 className="mt-4 font-semibold">{t('noCollections')}</h3>
           <p className="mt-1 text-sm text-muted-foreground">
-            Create your first collection to start organizing.
+            {t('noCollectionsDescription')}
           </p>
           <a
             href="/dashboard/collections"
             className="mt-4 inline-flex h-10 items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
           >
-            Go to Collections
+            {t('goToCollections')}
           </a>
         </div>
       )}

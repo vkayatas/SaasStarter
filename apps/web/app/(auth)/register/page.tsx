@@ -23,7 +23,7 @@ export default function RegisterPage() {
       { name, email, password },
       { onSuccess: () => router.push('/dashboard') },
     );
-    if (err) setError(err.message ?? 'Sign-up failed');
+    if (err) setError(err.message ?? t('signUpFailed'));
     setLoading(false);
   }
 

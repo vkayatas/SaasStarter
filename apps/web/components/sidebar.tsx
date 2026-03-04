@@ -14,7 +14,9 @@ import { useSidebar } from './sidebar-context';
 import { ThemeToggle } from './theme-toggle';
 import { LocaleSwitcher } from './locale-switcher';
 
-const navItems = [
+type NavLabelKey = 'home' | 'collections' | 'settings';
+
+const navItems: { href: '/dashboard' | '/dashboard/collections' | '/dashboard/settings'; icon: typeof Home; labelKey: NavLabelKey }[] = [
   { href: '/dashboard' as const, icon: Home, labelKey: 'home' as const },
   { href: '/dashboard/collections' as const, icon: FolderOpen, labelKey: 'collections' as const },
   { href: '/dashboard/settings' as const, icon: Settings, labelKey: 'settings' as const },
@@ -24,6 +26,7 @@ export function Sidebar() {
   const { collapsed, toggle } = useSidebar();
   const pathname = usePathname();
   const t = useTranslations('dashboard');
+  const tc = useTranslations('common');
 
   function isActive(href: string) {
     if (href === '/dashboard') return pathname === '/dashboard';
@@ -39,10 +42,10 @@ export function Sidebar() {
       {/* Logo / Brand */}
       <div className="flex h-14 items-center border-b px-4">
         {collapsed ? (
-          <span className="mx-auto text-lg font-bold">S</span>
+          <span className="mx-auto text-lg font-bold">{tc('appName').charAt(0)}</span>
         ) : (
           <Link href="/dashboard" className="text-lg font-bold">
-            SaaS Starter
+            {tc('appName')}
           </Link>
         )}
       </div>
@@ -82,7 +85,7 @@ export function Sidebar() {
           <button
             onClick={toggle}
             className="flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground hover:bg-accent hover:text-foreground"
-            aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+            aria-label={collapsed ? tc('expandSidebar') : tc('collapseSidebar')}
           >
             {collapsed ? (
               <PanelLeft className="h-4 w-4" />

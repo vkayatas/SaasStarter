@@ -19,7 +19,9 @@
     "password": "Password",
     "name": "Name",
     "noAccount": "Don't have an account?",
-    "haveAccount": "Already have an account?"
+    "haveAccount": "Already have an account?",
+    "signInFailed": "Sign-in failed",
+    "signUpFailed": "Sign-up failed"
   },
   "dashboard": {
     "title": "Dashboard",
@@ -40,13 +42,17 @@
   },
   "collections": {
     "title": "Collections",
+    "description": "Organize your items into collections.",
     "create": "Create",
     "newPlaceholder": "New collection name...",
     "created": "Collection created",
     "renamed": "Collection renamed",
     "deleted": "Collection deleted",
     "empty": "No collections yet. Create one to get started.",
-    "deleteConfirm": "Delete this collection?"
+    "deleteConfirm": "Delete this collection?",
+    "fetchError": "Failed to load collections. Please try refreshing.",
+    "rename": "Rename",
+    "updated": "Updated"
   },
   "notes": {
     "title": "Notes",
@@ -59,7 +65,9 @@
     "empty": "No notes yet. Create one to get started.",
     "deleteConfirm": "Delete this note?",
     "save": "Save",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "fetchError": "Failed to load notes. Please try refreshing.",
+    "saving": "Saving…"
   },
   "pricing": {
     "title": "Simple, transparent pricing",
@@ -105,7 +113,11 @@
     "dangerZone": "Danger Zone",
     "deleteAccount": "Delete Account",
     "deleteAccountDescription": "Permanently delete your account and all associated data. This action cannot be undone.",
-    "deleteAccountConfirm": "Are you sure you want to delete your account? This cannot be undone."
+    "deleteAccountConfirm": "Are you sure you want to delete your account? This cannot be undone.",
+    "accountDeleted": "Account deleted",
+    "unknownDevice": "Unknown device",
+    "unknownOS": "Unknown OS",
+    "unknownIP": "Unknown IP"
   },
   "common": {
     "save": "Save",
@@ -117,6 +129,18 @@
     "error": "Something went wrong",
     "retry": "Try again",
     "theme": "Toggle theme",
-    "language": "Switch language"
+    "language": "Switch language",
+    "signOut": "Sign Out",
+    "signedOut": "Signed out",
+    "signIn": "Sign In",
+    "settings": "Settings",
+    "userMenu": "User menu",
+    "appName": "SaaS Starter",
+    "expandSidebar": "Expand sidebar",
+    "collapseSidebar": "Collapse sidebar",
+    "openMenu": "Open menu",
+    "notFoundTitle": "404",
+    "notFoundDescription": "The page you're looking for doesn't exist.",
+    "goHome": "Go home"
   }
 }

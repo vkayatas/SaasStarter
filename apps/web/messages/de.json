@@ -19,7 +19,9 @@
     "password": "Passwort",
     "name": "Name",
     "noAccount": "Noch kein Konto?",
-    "haveAccount": "Bereits ein Konto?"
+    "haveAccount": "Bereits ein Konto?",
+    "signInFailed": "Anmeldung fehlgeschlagen",
+    "signUpFailed": "Registrierung fehlgeschlagen"
   },
   "dashboard": {
     "title": "Dashboard",
@@ -40,13 +42,17 @@
   },
   "collections": {
     "title": "Sammlungen",
+    "description": "Organisiere deine Einträge in Sammlungen.",
     "create": "Erstellen",
     "newPlaceholder": "Neuer Sammlungsname...",
     "created": "Sammlung erstellt",
     "renamed": "Sammlung umbenannt",
     "deleted": "Sammlung gelöscht",
     "empty": "Noch keine Sammlungen. Erstelle eine, um loszulegen.",
-    "deleteConfirm": "Diese Sammlung löschen?"
+    "deleteConfirm": "Diese Sammlung löschen?",
+    "fetchError": "Sammlungen konnten nicht geladen werden. Bitte aktualisiere die Seite.",
+    "rename": "Umbenennen",
+    "updated": "Aktualisiert"
   },
   "notes": {
     "title": "Notizen",
@@ -59,7 +65,9 @@
     "empty": "Noch keine Notizen. Erstelle eine, um loszulegen.",
     "deleteConfirm": "Diese Notiz löschen?",
     "save": "Speichern",
-    "cancel": "Abbrechen"
+    "cancel": "Abbrechen",
+    "fetchError": "Notizen konnten nicht geladen werden. Bitte aktualisiere die Seite.",
+    "saving": "Speichern…"
   },
   "pricing": {
     "title": "Einfache, transparente Preise",
@@ -105,7 +113,11 @@
     "dangerZone": "Gefahrenzone",
     "deleteAccount": "Konto löschen",
     "deleteAccountDescription": "Lösche dein Konto und alle zugehörigen Daten dauerhaft. Diese Aktion kann nicht rückgängig gemacht werden.",
-    "deleteAccountConfirm": "Bist du sicher, dass du dein Konto löschen möchtest? Dies kann nicht rückgängig gemacht werden."
+    "deleteAccountConfirm": "Bist du sicher, dass du dein Konto löschen möchtest? Dies kann nicht rückgängig gemacht werden.",
+    "accountDeleted": "Konto gelöscht",
+    "unknownDevice": "Unbekanntes Gerät",
+    "unknownOS": "Unbekanntes Betriebssystem",
+    "unknownIP": "Unbekannte IP"
   },
   "common": {
     "save": "Speichern",
@@ -117,6 +129,18 @@
     "error": "Etwas ist schiefgelaufen",
     "retry": "Erneut versuchen",
     "theme": "Design wechseln",
-    "language": "Sprache wechseln"
+    "language": "Sprache wechseln",
+    "signOut": "Abmelden",
+    "signedOut": "Abgemeldet",
+    "signIn": "Anmelden",
+    "settings": "Einstellungen",
+    "userMenu": "Benutzermenü",
+    "appName": "SaaS Starter",
+    "expandSidebar": "Seitenleiste erweitern",
+    "collapseSidebar": "Seitenleiste einklappen",
+    "openMenu": "Menü öffnen",
+    "notFoundTitle": "404",
+    "notFoundDescription": "Die gesuchte Seite existiert nicht.",
+    "goHome": "Zur Startseite"
   }
 }

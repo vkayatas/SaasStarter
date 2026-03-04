@@ -32,7 +32,7 @@ export function DangerZone() {
     setDeleting(true);
     try {
       await authClient.deleteUser();
-      toast.success('Account deleted');
+      toast.success(t('accountDeleted'));
       router.push('/');
       router.refresh();
     } catch {

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Plus, Trash2, FileText, Loader2, ArrowLeft, Tag } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 import Link from 'next/link';
 
@@ -64,6 +65,8 @@ export function NotesList({ collectionId, collectionName }: { collectionId: stri
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editContent, setEditContent] = useState('');
   const [editTags, setEditTags] = useState('');
+  const t = useTranslations('notes');
+  const tc = useTranslations('common');
 
   const { data: notesList, isLoading, error } = useQuery({
     queryKey: ['notes', collectionId],
@@ -77,7 +80,7 @@ export function NotesList({ collectionId, collectionName }: { collectionId: stri
       queryClient.invalidateQueries({ queryKey: ['notes', collectionId] });
       setNewContent('');
       setNewTags('');
-      toast.success('Note created');
+      toast.success(t('created'));
     },
     onError: (err: Error) => toast.error(err.message),
   });
@@ -88,7 +91,7 @@ export function NotesList({ collectionId, collectionName }: { collectionId: stri
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['notes', collectionId] });
       setEditingId(null);
-      toast.success('Note updated');
+      toast.success(t('updated'));
     },
     onError: (err: Error) => toast.error(err.message),
   });
@@ -97,7 +100,7 @@ export function NotesList({ collectionId, collectionName }: { collectionId: stri
     mutationFn: (noteId: string) => deleteNoteApi(collectionId, noteId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['notes', collectionId] });
-      toast.success('Note deleted');
+      toast.success(t('deleted'));
     },
     onError: (err: Error) => toast.error(err.message),
   });
@@ -133,7 +136,7 @@ export function NotesList({ collectionId, collectionName }: { collectionId: stri
   if (error) {
     return (
       <div className="rounded-lg border border-destructive/50 bg-destructive/10 p-4 text-sm text-destructive">
-        Failed to load notes. Please try refreshing.
+        {t('fetchError')}
       </div>
     );
   }
@@ -156,7 +159,7 @@ export function NotesList({ collectionId, collectionName }: { collectionId: stri
         <textarea
           value={newContent}
           onChange={(e) => setNewContent(e.target.value)}
-          placeholder="Write a new note..."
+          placeholder={t('notePlaceholder')}
           rows={3}
           className="w-full resize-none rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
         />
@@ -165,7 +168,7 @@ export function NotesList({ collectionId, collectionName }: { collectionId: stri
             type="text"
             value={newTags}
             onChange={(e) => setNewTags(e.target.value)}
-            placeholder="Tags (comma-separated)..."
+            placeholder={t('tagsPlaceholder')}
             className="flex h-9 flex-1 rounded-md border border-input bg-background px-3 py-1 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           />
           <button
@@ -178,7 +181,7 @@ export function NotesList({ collectionId, collectionName }: { collectionId: stri
             ) : (
               <Plus className="h-4 w-4" />
             )}
-            Add Note
+            {t('addNote')}
           </button>
         </div>
       </form>
@@ -188,7 +191,7 @@ export function NotesList({ collectionId, collectionName }: { collectionId: stri
         <div className="flex flex-col items-center gap-2 rounded-lg border border-dashed p-12 text-center">
           <FileText className="h-10 w-10 text-muted-foreground" />
           <p className="text-sm text-muted-foreground">
-            No notes yet. Create one to get started.
+            {t('empty')}
           </p>
         </div>
       ) : (
@@ -211,7 +214,7 @@ export function NotesList({ collectionId, collectionName }: { collectionId: stri
                     type="text"
                     value={editTags}
                     onChange={(e) => setEditTags(e.target.value)}
-                    placeholder="Tags (comma-separated)..."
+                    placeholder={t('tagsPlaceholder')}
                     className="flex h-8 w-full rounded-md border border-input bg-background px-3 py-1 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   />
                   <div className="flex gap-2">
@@ -220,13 +223,13 @@ export function NotesList({ collectionId, collectionName }: { collectionId: stri
                       disabled={updateMutation.isPending}
                       className="rounded bg-primary px-3 py-1 text-xs text-primary-foreground"
                     >
-                      {updateMutation.isPending ? 'Saving…' : 'Save'}
+                      {updateMutation.isPending ? t('saving') : t('save')}
                     </button>
                     <button
                       onClick={() => setEditingId(null)}
                       className="rounded border px-3 py-1 text-xs"
                     >
-                      Cancel
+                      {t('cancel')}
                     </button>
                   </div>
                 </div>
@@ -262,18 +265,18 @@ export function NotesList({ collectionId, collectionName }: { collectionId: stri
                       setEditTags(note.tags?.join(', ') ?? '');
                     }}
                     className="rounded p-1 hover:bg-accent"
-                    title="Edit"
+                    title={tc('edit')}
                   >
                     <FileText className="h-3.5 w-3.5 text-muted-foreground" />
                   </button>
                   <button
                     onClick={() => {
-                      if (confirm('Delete this note?')) {
+                      if (confirm(t('deleteConfirm'))) {
                         deleteMutation.mutate(note.id);
                       }
                     }}
                     className="rounded p-1 hover:bg-destructive/10"
-                    title="Delete"
+                    title={tc('delete')}
                   >
                     <Trash2 className="h-3.5 w-3.5 text-destructive" />
                   </button>

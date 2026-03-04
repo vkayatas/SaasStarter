@@ -22,7 +22,7 @@ export default function LoginPage() {
       { email, password },
       { onSuccess: () => router.push('/dashboard') },
     );
-    if (err) setError(err.message ?? 'Sign-in failed');
+    if (err) setError(err.message ?? t('signInFailed'));
     setLoading(false);
   }
 

@@ -18,6 +18,7 @@ export function MobileNav() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const t = useTranslations('dashboard');
+  const tc = useTranslations('common');
 
   function isActive(href: string) {
     if (href === '/dashboard') return pathname === '/dashboard';
@@ -29,7 +30,7 @@ export function MobileNav() {
       <button
         onClick={() => setOpen(true)}
         className="flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground hover:bg-accent md:hidden"
-        aria-label="Open menu"
+        aria-label={tc('openMenu')}
       >
         <Menu className="h-5 w-5" />
       </button>
@@ -49,7 +50,7 @@ export function MobileNav() {
         }`}
       >
         <div className="flex h-14 items-center justify-between border-b px-4">
-          <span className="text-lg font-bold">SaaS Starter</span>
+          <span className="text-lg font-bold">{tc('appName')}</span>
           <button
             onClick={() => setOpen(false)}
             className="flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground hover:bg-accent"
