@@ -16,6 +16,9 @@ function createAuth() {
     }),
     baseURL: process.env.BETTER_AUTH_URL ?? process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000',
     secret: process.env.BETTER_AUTH_SECRET ?? process.env.AUTH_SECRET,
+    trustedOrigins: process.env.NODE_ENV === 'development'
+      ? ['http://localhost:*']            // accept any localhost port in dev
+      : [process.env.NEXT_PUBLIC_APP_URL ?? ''],
     emailAndPassword: {
       enabled: true,
       requireEmailVerification: false, // flip to true once SMTP is wired
