@@ -18,7 +18,7 @@ const envSchema = z.object({
   RESEND_API_KEY: optionalStr,
 });
 
-// Lazy config — only validates on first access, not at import time
+// Lazy config - only validates on first access, not at import time
 let _config: z.infer<typeof envSchema> | undefined;
 
 export function getConfig() {

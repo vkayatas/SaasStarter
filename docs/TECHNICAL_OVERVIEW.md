@@ -1,4 +1,4 @@
-# SaaS Starter Stack V2 — Technical Overview
+# SaaS Starter Stack V2 - Technical Overview
 
 > **Purpose:** Complete technical blueprint for a modern, cross-platform SaaS application. Optimized for scalability, cost-effectiveness, beautiful design, and a clear path to mobile and desktop apps.
 
@@ -30,7 +30,7 @@
 | Layer | Technology | Notes |
 |-------|-----------|-------|
 | **Language** | TypeScript (everywhere) | One language across web, mobile, desktop, backend |
-| **Web Framework** | Next.js 15 (App Router) | SSR, SSG, SPA — all in one. File-based routing |
+| **Web Framework** | Next.js 15 (App Router) | SSR, SSG, SPA - all in one. File-based routing |
 | **UI Components** | shadcn/ui + Radix UI | Accessible, themeable, you own the code |
 | **Styling** | Tailwind CSS 4 | Utility-first, dark mode built-in |
 | **State** | Zustand | Lightweight, TypeScript-first, works in React + React Native |
@@ -97,7 +97,7 @@ saas/
 │   │   │   │   ├── layout.tsx      # Dashboard shell (sidebar, nav)
 │   │   │   │   ├── page.tsx        # Dashboard home
 │   │   │   │   └── [feature]/page.tsx
-│   │   │   ├── (marketing)/        # Public pages — SSR for SEO
+│   │   │   ├── (marketing)/        # Public pages - SSR for SEO
 │   │   │   │   ├── page.tsx        # Landing page
 │   │   │   │   ├── pricing/page.tsx
 │   │   │   │   └── blog/[slug]/page.tsx
@@ -241,7 +241,7 @@ const config = {
 
 | Route Group | Rendering | Auth | Purpose |
 |-------------|-----------|------|---------|
-| `(marketing)/*` | SSR / SSG | Public | Landing, pricing, blog — SEO optimized |
+| `(marketing)/*` | SSR / SSG | Public | Landing, pricing, blog - SEO optimized |
 | `(auth)/*` | Client-side | Public | Login, register, forgot password |
 | `(dashboard)/*` | Client-side | Protected | Core application |
 | `api/v1/*` | Edge / Node | Varies | API endpoints |
@@ -249,7 +249,7 @@ const config = {
 ### Middleware
 
 ```typescript
-// middleware.ts — runs on every request at the edge
+// middleware.ts - runs on every request at the edge
 export function middleware(request: NextRequest) {
   // 1. i18n locale detection + redirect
   // 2. Auth check for protected routes (/dashboard/*)
@@ -273,7 +273,7 @@ export const config = {
 | **i18n completeness** | Every user-facing string via `next-intl`. All keys must exist in all locale files |
 | **Error boundaries** | Every route group has an `error.tsx`. Global fallback in root `error.tsx` |
 | **Loading states** | Every async page has a `loading.tsx` with skeleton UI |
-| **Type-safe routes** | `experimental.typedRoutes` enabled — invalid `<Link href>` is a TS error |
+| **Type-safe routes** | `experimental.typedRoutes` enabled - invalid `<Link href>` is a TS error |
 
 ### Key Web Dependencies
 
@@ -298,7 +298,7 @@ export const config = {
 
 ### shadcn/ui Setup
 
-shadcn/ui generates components into your codebase. You own every line — no black-box dependency.
+shadcn/ui generates components into your codebase. You own every line - no black-box dependency.
 
 ```
 apps/web/components/ui/        # Generated shadcn/ui components
@@ -360,11 +360,11 @@ Change the entire look of the app by editing these variables. No component code 
 Phase 1: Next.js API Routes handle everything.
 Phase 2: When complexity grows, extract to a standalone TypeScript API (Hono or Fastify).
 
-The shared `packages/db` and `packages/api-client` make this extraction seamless — the API contract doesn't change.
+The shared `packages/db` and `packages/api-client` make this extraction seamless - the API contract doesn't change.
 
 ### Environment Configuration
 
-Centralized, validated configuration loaded at startup. Inspired by the Pydantic Settings pattern — fail fast on misconfiguration, never silently run with bad defaults.
+Centralized, validated configuration loaded at startup. Inspired by the Pydantic Settings pattern - fail fast on misconfiguration, never silently run with bad defaults.
 
 ```typescript
 // lib/config.ts
@@ -388,24 +388,24 @@ export type Config = z.infer<typeof envSchema>;
 |----------|---------|--------|
 | `NODE_ENV` | Controls behavior (dev relaxations, prod strictness) | `development` |
 | `DATABASE_URL` | Neon PostgreSQL connection string | (required) |
-| `AUTH_SECRET` | Signing key for sessions/tokens | (required — validated min 32 chars) |
+| `AUTH_SECRET` | Signing key for sessions/tokens | (required - validated min 32 chars) |
 | `CORS_ORIGINS` | Comma-separated allowed origins | (required) |
 | `ADMIN_EMAILS` | Comma-separated admin email addresses | (none) |
 | `UPSTASH_REDIS_URL` | Redis for rate limiting & cache | (optional in dev) |
 | `RESEND_API_KEY` | Transactional email | (optional in dev) |
 
-**Key rule:** Import `config` — never read `process.env` directly in business logic. One place to validate, one place to mock in tests.
+**Key rule:** Import `config` - never read `process.env` directly in business logic. One place to validate, one place to mock in tests.
 
 ### Startup Guards
 
 Borrowed from the battle-tested pattern of refusing to start on misconfiguration. Prevents silent failures in staging/production.
 
 ```typescript
-// lib/startup.ts — called from instrumentation.ts or root layout
+// lib/startup.ts - called from instrumentation.ts or root layout
 export async function runStartupChecks() {
   const env = config.NODE_ENV;
 
-  // 1. Schema migration check — refuse to start if DB is behind
+  // 1. Schema migration check - refuse to start if DB is behind
   if (env !== 'development') {
     const applied = await getAppliedMigrationVersion();
     const expected = getExpectedMigrationVersion(); // from migration files on disk
@@ -433,7 +433,7 @@ export async function runStartupChecks() {
 }
 ```
 
-**Why this matters:** This pattern alone prevents an entire class of deployment bugs — running app code against an outdated schema, accidentally shipping wildcard CORS, or deploying with a weak secret.
+**Why this matters:** This pattern alone prevents an entire class of deployment bugs - running app code against an outdated schema, accidentally shipping wildcard CORS, or deploying with a weak secret.
 
 ### API Routes Structure
 
@@ -463,10 +463,10 @@ app/api/
 | **Error responses** | Consistent error format: `{ error: string, code: string, details?: unknown }` |
 | **Rate limiting** | Upstash Redis-based: per-IP for public, per-user for authenticated, stricter on sensitive endpoints |
 | **Date bounds** | All date-range queries filter with both upper AND lower bounds (prevents future data leaking) |
-| **Rounding** | All numeric values (currency, percentages, metrics) rounded to appropriate decimal places at the API layer — not in the UI |
+| **Rounding** | All numeric values (currency, percentages, metrics) rounded to appropriate decimal places at the API layer - not in the UI |
 | **Pagination** | Cursor-based pagination by default (offset-based for admin/reports) |
 | **N+1 prevention** | Drizzle's relational queries with explicit `with` clauses |
-| **Denormalized display key** | Child tables store a human-readable key (e.g. `slug`, `name`) alongside FK for fast display queries — reads vastly outnumber key changes |
+| **Denormalized display key** | Child tables store a human-readable key (e.g. `slug`, `name`) alongside FK for fast display queries - reads vastly outnumber key changes |
 | **Soft deletes** | User data uses `deletedAt` column for GDPR compliance |
 | **Audit logging** | All mutations log `userId`, `action`, `entityType`, `entityId`, `timestamp` |
 
@@ -478,11 +478,11 @@ V2 loses FastAPI's automatic Swagger/ReDoc generation. Compensate with an explic
 |----------|------|-------------|
 | **OpenAPI spec generation** | `next-swagger-doc` or `swagger-jsdoc` | Generate OpenAPI 3.1 spec from JSDoc annotations on API routes |
 | **Interactive docs** | Scalar or Swagger UI | Serve at `/api/docs` in development (`NODE_ENV !== 'production'`) |
-| **Type-driven docs** | Zod schemas from `packages/api-client` | Schemas double as documentation — request/response shapes are always up-to-date |
+| **Type-driven docs** | Zod schemas from `packages/api-client` | Schemas double as documentation - request/response shapes are always up-to-date |
 | **Route catalog** | Custom `/api/health` extension | List all registered routes with methods and auth requirements |
 
 ```typescript
-// app/api/docs/route.ts — serve OpenAPI docs (dev only)
+// app/api/docs/route.ts - serve OpenAPI docs (dev only)
 import { createSwaggerSpec } from 'next-swagger-doc';
 
 export async function GET() {
@@ -500,7 +500,7 @@ export async function GET() {
 }
 ```
 
-**Key rule:** API docs are auto-generated from code annotations + Zod schemas. Never maintain a separate spec file manually — it will drift.
+**Key rule:** API docs are auto-generated from code annotations + Zod schemas. Never maintain a separate spec file manually - it will drift.
 
 ### Data Ingestion & Quality (ETL)
 
@@ -537,7 +537,7 @@ export async function checkOrphanedRecords(db: Database): Promise<QualityReport>
 
 | Pattern | Description |
 |---------|-------------|
-| **Abstract loader base class** | All ETL scripts extend `BaseLoader` — consistent fetch → validate → upsert → log pipeline |
+| **Abstract loader base class** | All ETL scripts extend `BaseLoader` - consistent fetch → validate → upsert → log pipeline |
 | **Zod validation on ingest** | Same schemas used for API input validate external data. Reject bad data early. |
 | **Quality reports** | Scheduled checks (via Vercel Cron) surface orphaned records, data inconsistencies, expired tokens |
 | **Admin dashboard** | Data quality report summary at `/dashboard/admin/data-quality` |
@@ -681,9 +681,9 @@ export const shareInvites = pgTable('share_invites', {
 ```
 
 This pattern supports three access modes:
-- **Public** — anyone with the share link can view
-- **Authenticated** — any logged-in user with the link can view
-- **Invite-only** — only users with accepted invites can view/edit
+- **Public** - anyone with the share link can view
+- **Authenticated** - any logged-in user with the link can view
+- **Invite-only** - only users with accepted invites can view/edit
 
 ### Notable Design Decisions
 
@@ -691,7 +691,7 @@ This pattern supports three access modes:
 |----------|-----------|
 | **UUID PKs everywhere** | No info leakage, no collision on merge, consistent across all tables |
 | **Drizzle over Prisma** | Lighter, closer to SQL, faster cold starts on serverless, better type inference |
-| **Neon serverless driver** | HTTP-based — no persistent connection needed, works in Edge Runtime |
+| **Neon serverless driver** | HTTP-based - no persistent connection needed, works in Edge Runtime |
 | **JSONB + GIN for tags** | Flexible tagging without junction tables. Native PostgreSQL `@>` operator queries |
 | **CASCADE deletes on user FK** | GDPR: deleting a user removes all their data automatically |
 | **Soft delete (`deletedAt`) for users** | Grace period for account recovery before hard delete |
@@ -782,10 +782,10 @@ This pattern (borrowed from battle-tested JWT rotation) adds meaningful defense-
 
 ### Why Expo (React Native)
 
-- **True native rendering** — not a WebView wrapper
-- **Expo Router** — file-based routing identical to Next.js (knowledge transfers)
-- **EAS Build** — cloud builds for iOS and Android without local Xcode/Android Studio
-- **Over-the-air updates** — push JS updates without App Store review
+- **True native rendering** - not a WebView wrapper
+- **Expo Router** - file-based routing identical to Next.js (knowledge transfers)
+- **EAS Build** - cloud builds for iOS and Android without local Xcode/Android Studio
+- **Over-the-air updates** - push JS updates without App Store review
 - **~60-80% code sharing** with web via shared packages
 
 ### Mobile Architecture
@@ -842,7 +842,7 @@ apps/mobile/
 
 ### When to Add Desktop
 
-Desktop is **Phase 3** — only when there's a clear need (offline access, system integration, heavy local processing). Most SaaS apps don't need this.
+Desktop is **Phase 3** - only when there's a clear need (offline access, system integration, heavy local processing). Most SaaS apps don't need this.
 
 ### Why Tauri v2 over Electron
 
@@ -855,7 +855,7 @@ Desktop is **Phase 3** — only when there's a clear need (offline access, syste
 
 ### Architecture
 
-Tauri wraps your Next.js web app (or a static export) in a native window. For most SaaS use cases, this is sufficient — users get a native app icon, system tray, and keyboard shortcuts.
+Tauri wraps your Next.js web app (or a static export) in a native window. For most SaaS use cases, this is sufficient - users get a native app icon, system tray, and keyboard shortcuts.
 
 ```
 apps/desktop/
@@ -932,11 +932,11 @@ export function formatCurrency(amount: number, currency = 'EUR', locale = 'de-DE
 
 ### `packages/db`
 
-Single source of truth for database schema. Used by the API layer and migration tooling — never imported by frontend/mobile.
+Single source of truth for database schema. Used by the API layer and migration tooling - never imported by frontend/mobile.
 
 ### `packages/data-quality`
 
-Data integrity checks, ETL loaders, and quality reports. Used by admin dashboard and scheduled jobs — never imported by frontend/mobile.
+Data integrity checks, ETL loaders, and quality reports. Used by admin dashboard and scheduled jobs - never imported by frontend/mobile.
 
 ```typescript
 // packages/data-quality/src/reports/quality-report.ts
@@ -998,7 +998,7 @@ packages/shared/
 
 ### Test Tags & Selective Execution
 
-Inspired by pytest markers — tag tests so CI can run the right subset:
+Inspired by pytest markers - tag tests so CI can run the right subset:
 
 | Tag | Description | CI Behavior |
 |-----|-------------|-------------|
@@ -1018,15 +1018,15 @@ export default defineConfig({
 });
 ```
 
-**Key rule:** smoke tests are never in the PR quality gate — they require a running deployment and may hit external services.
+**Key rule:** smoke tests are never in the PR quality gate - they require a running deployment and may hit external services.
 
 ### Test Environment
 
-- **Neon branching** — each PR gets its own database branch (isolated, production-like schema)
-- **Environment variables** — test-specific values via `.env.test`
-- **Seed data** — deterministic fixtures loaded before integration/E2E tests
-- **CI** — unit + integration tests run on every PR. E2E runs on merge to `main`
-- **`NODE_ENV=development`** enforced in CI — tests never run in staging/prod mode
+- **Neon branching** - each PR gets its own database branch (isolated, production-like schema)
+- **Environment variables** - test-specific values via `.env.test`
+- **Seed data** - deterministic fixtures loaded before integration/E2E tests
+- **CI** - unit + integration tests run on every PR. E2E runs on merge to `main`
+- **`NODE_ENV=development`** enforced in CI - tests never run in staging/prod mode
 - **`AUTH_SECRET`** defaults to `test_secret_key_for_testing_only_32chars!` in test env
 - **CSRF enforcement** off by default in tests (can be forced with env flag)
 
@@ -1034,7 +1034,7 @@ export default defineConfig({
 
 ## 12. CI/CD Workflows
 
-### `ci.yml` — Quality Gate
+### `ci.yml` - Quality Gate
 
 **Triggers:** PRs to `main`, manual dispatch.
 
@@ -1047,7 +1047,7 @@ export default defineConfig({
 | **Security** | `pnpm audit --audit-level=high` + Gitleaks |
 | **Dependency Review** | `dependency-review-action` on PRs |
 
-### `preview.yml` — Preview Deployments
+### `preview.yml` - Preview Deployments
 
 **Trigger:** Every PR automatically.
 
@@ -1055,7 +1055,7 @@ export default defineConfig({
 - Neon creates a database branch from production
 - PR comment with preview URL + test results
 
-### `deploy.yml` — Production
+### `deploy.yml` - Production
 
 **Trigger:** Merge to `main` (auto) or manual dispatch.
 
@@ -1067,7 +1067,7 @@ export default defineConfig({
 | Health check | Verify `/api/health` returns 200 |
 | Notify | Slack/Discord notification |
 
-### `pre-release.yml` — Release Gate
+### `pre-release.yml` - Release Gate
 
 **Trigger:** Manual dispatch before creating a release tag.
 
@@ -1084,7 +1084,7 @@ Full validation suite beyond the standard PR quality gate:
 
 This prevents "it passed CI but broke in production" scenarios. Run it before every version tag.
 
-### `maintenance.yml` — Automated Upkeep
+### `maintenance.yml` - Automated Upkeep
 
 | Task | Schedule | Description |
 |------|----------|-------------|
@@ -1176,7 +1176,7 @@ export async function GET() {
 
 ## 14. Cost Breakdown
 
-### Phase 1: MVP (Months 1–6) — ~$1/month
+### Phase 1: MVP (Months 1–6) - ~$1/month
 
 | Service | Tier | Monthly Cost |
 |---------|------|-------------|
@@ -1189,7 +1189,7 @@ export async function GET() {
 | Domain | ~$12/year | ~$1 |
 | **Total** | | **~$1/mo** |
 
-### Phase 2: Growing (Months 6–18) — ~$60/month
+### Phase 2: Growing (Months 6–18) - ~$60/month
 
 | Service | Tier | Monthly Cost |
 |---------|------|-------------|
@@ -1201,7 +1201,7 @@ export async function GET() {
 | EAS Build (mobile) | Free tier (30 builds/mo) | $0 |
 | **Total** | | **~$65/mo** |
 
-### Phase 3: Scaling (18+ months) — ~$200–400/month
+### Phase 3: Scaling (18+ months) - ~$200–400/month
 
 | Service | Tier | Monthly Cost |
 |---------|------|-------------|
@@ -1213,7 +1213,7 @@ export async function GET() {
 | EAS Build | Production | $99 |
 | **Total** | | **~$200–400/mo** |
 
-### Phase 3 Alternative: VPS Migration (Hetzner) — ~€5–15/month
+### Phase 3 Alternative: VPS Migration (Hetzner) - ~€5–15/month
 
 > **Trigger:** When serverless costs exceed ~€200/mo OR you want full infrastructure control.
 > **Strategy:** Start serverless (Phase 1–2), migrate to VPS when it makes financial sense.
@@ -1235,9 +1235,9 @@ Full stack on a single CX22 (€4.85/mo):
 | Redis (Upstash) | $5/mo | €0 (self-managed Redis) |
 | SSL | $0 (Vercel) | €0 (Caddy auto-SSL) |
 | **Total** | **~$65/mo** | **~€5/mo** |
-| **Savings** | — | **~$60/mo (~92%)** |
+| **Savings** | - | **~$60/mo (~92%)** |
 
-> **Keep managed where it matters:** You can also run a hybrid — VPS for compute (€5/mo) + Neon for database ($19/mo) + Upstash for Redis ($5/mo). Total ~€30/mo with zero database ops.
+> **Keep managed where it matters:** You can also run a hybrid - VPS for compute (€5/mo) + Neon for database ($19/mo) + Upstash for Redis ($5/mo). Total ~€30/mo with zero database ops.
 
 ### Cost vs. VPS Self-Hosting
 
@@ -1296,7 +1296,7 @@ Week 8:  Production deploy (Vercel)
          Health check endpoint
          Sentry error tracking
          Pre-release validation workflow
-         BUFFER — fix what broke during weeks 1–7
+         BUFFER - fix what broke during weeks 1–7
 ```
 
 ### Phase 2: Harden & Grow (Months 3–6)
@@ -1344,7 +1344,7 @@ Month 10:   App Store assets (screenshots, descriptions, review guidelines)
 Migrate from Vercel to self-hosted VPS (e.g. Hetzner CX22 at €4.85/mo) to cut hosting costs by ~92%. See §14 for full cost comparison.
 
 ```
-- Enable `output: 'standalone'` in next.config.ts (should already be set — verify!)
+- Enable `output: 'standalone'` in next.config.ts (should already be set - verify!)
 - Provision Hetzner CX22 (or CX32 for more headroom)
 - Set up Caddy reverse proxy + auto-SSL
 - Install PostgreSQL 16 + Redis (or keep Neon/Upstash managed)
@@ -1398,7 +1398,7 @@ Most SaaS apps never need this. Only pursue with clear user demand.
 | **JSONB tags with GIN index** | Flexible tagging without a join table. Native PostgreSQL query support (`@>` operator). Works identically in SQLAlchemy and Drizzle. |
 | **HTTP-only cookie auth** | Eliminates XSS token theft. Combined with refresh token rotation, provides defense-in-depth without complexity for the user. |
 | **Denormalized display key in child tables** | Faster reads at the cost of updating multiple tables on key change. Reads vastly outnumber key changes in any SaaS. |
-| **CI security tooling on every PR** | Gitleaks + dependency audit + static analysis in every PR — catches issues before merge without manual effort. |
+| **CI security tooling on every PR** | Gitleaks + dependency audit + static analysis in every PR - catches issues before merge without manual effort. |
 | **shadcn/ui component ownership** | No black-box dependency updates breaking your UI. `npx shadcn@latest diff` shows what changed upstream. |
 
 ### Known Trade-offs (Honest Assessment)
@@ -1407,17 +1407,17 @@ Most SaaS apps never need this. Only pursue with clear user demand.
 |----------|-----------|-----------|
 | **Vercel hosting** | Vendor lock-in. Pricing scales with usage. Hobby tier disallows commercial use ($20/mo minimum). | Next.js can self-host on Node.js. Keep infra-specific code minimal. Document VPS fallback (see below). |
 | **Serverless API routes** | Cold starts on infrequent endpoints (~200–500ms). No WebSockets. 10s execution limit (Hobby) / 60s (Pro). No persistent state. | Neon serverless driver (HTTP-based, no connection pool needed). Warm critical endpoints. Extract to Hono if you hit the ceiling. |
-| **Separate web + mobile codebases** | UI components differ (React DOM vs React Native). The "60–80% code sharing" is misleading — types/schemas/logic are shared (~15%), but all UI is separate. | Share everything except UI via packages. Use NativeWind for consistent styling language. Be honest about the maintenance cost of two apps. |
+| **Separate web + mobile codebases** | UI components differ (React DOM vs React Native). The "60–80% code sharing" is misleading - types/schemas/logic are shared (~15%), but all UI is separate. | Share everything except UI via packages. Use NativeWind for consistent styling language. Be honest about the maintenance cost of two apps. |
 | **Full TypeScript** | Loses Python's data science ecosystem. TypeScript is more verbose for scripts. No equivalent to FastAPI's auto-generated OpenAPI docs. | If you need ML/data processing, run Python microservices alongside. Use `swagger-jsdoc` or similar for API documentation if needed. |
 | **shadcn/ui components are copied, not versioned** | No automatic updates when shadcn/ui improves a component. | `npx shadcn@latest diff` shows what changed. Manual upgrade is quick. |
 | **Drizzle is newer than Prisma** | Smaller community, fewer tutorials, potential breaking changes between versions. | Growing fast. SQL knowledge transfers. Escape hatch: raw SQL is always available. |
 | **No Redis in Phase 1** | No app-level caching for expensive queries. | React Query handles client-side caching. Add Upstash Redis in Phase 2 when you identify slow endpoints. |
 | **No background task queue in Phase 1** | Scheduled tasks via Vercel Cron + `after()` only. No retries, no complex workflows. | Fine for early-stage. Graduate to Trigger.dev or Inngest when you need retries and long-running jobs. |
-| **Denormalized display keys** | Requires updating multiple tables on key change. | Still worth it — reads vastly outnumber key changes. Consider a materialized view for complex reports. |
+| **Denormalized display keys** | Requires updating multiple tables on key change. | Still worth it - reads vastly outnumber key changes. Consider a materialized view for complex reports. |
 
 ### VPS Migration Strategy (Hetzner)
 
-> **This is not a fallback — it's the planned cost optimization path.** Start serverless, graduate to VPS when it makes financial sense (typically when serverless costs exceed ~€200/mo, or earlier if you prefer infrastructure control).
+> **This is not a fallback - it's the planned cost optimization path.** Start serverless, graduate to VPS when it makes financial sense (typically when serverless costs exceed ~€200/mo, or earlier if you prefer infrastructure control).
 
 Hetzner CX22 (€4.85/mo) or CX32 (€8.45/mo) can run the entire stack:
 
@@ -1445,10 +1445,10 @@ Hetzner CX22 (€4.85/mo) or CX32 (€8.45/mo) can run the entire stack:
 
 #### Migration Prerequisites (enforce from Day 1)
 
-- [ ] `output: 'standalone'` set in `next.config.ts` — produces a self-contained Node.js server that runs anywhere
+- [ ] `output: 'standalone'` set in `next.config.ts` - produces a self-contained Node.js server that runs anywhere
 - [ ] No Vercel-specific APIs in business logic (avoid Vercel KV, Blob, Edge Config)
 - [ ] `deploy/` scripts maintained and committed to repo
-- [ ] Quarterly VPS deploy test — run `next build && next start` locally to verify standalone mode works
+- [ ] Quarterly VPS deploy test - run `next build && next start` locally to verify standalone mode works
 - [ ] Database connection string is standard PostgreSQL (works with both Neon and self-managed)
 
 #### When to Pull the Trigger
@@ -1462,7 +1462,7 @@ Hetzner CX22 (€4.85/mo) or CX32 (€8.45/mo) can run the entire stack:
 
 ### Deploy Scripts (VPS Migration)
 
-Keep these scripts in `deploy/` from Day 1 — they're your migration-ready insurance policy:
+Keep these scripts in `deploy/` from Day 1 - they're your migration-ready insurance policy:
 
 | Script | Purpose |
 |--------|---------|

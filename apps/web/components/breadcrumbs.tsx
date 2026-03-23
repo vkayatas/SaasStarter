@@ -39,7 +39,7 @@ export function Breadcrumbs() {
       const t = translators[mapping.ns];
       label = t ? t(mapping.key) : seg;
     } else {
-      // Dynamic segment (e.g. collection ID) — show truncated
+      // Dynamic segment (e.g. collection ID) - show truncated
       label = seg.length > 12 ? seg.slice(0, 12) + '…' : seg;
     }
     return { href, label, isLast: i === segments.length - 1 };

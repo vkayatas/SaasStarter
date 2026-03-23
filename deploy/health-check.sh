@@ -9,7 +9,7 @@ URL="${1:-http://localhost:3000}"
 echo "[health] Checking $URL/api/v1/health..."
 
 RESPONSE=$(curl -sf "$URL/api/v1/health" 2>&1) || {
-  echo "[health] FAILED — server not responding"
+  echo "[health] FAILED - server not responding"
   exit 1
 }
 

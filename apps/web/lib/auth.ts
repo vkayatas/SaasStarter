@@ -50,7 +50,7 @@ function createAuth() {
   });
 }
 
-// Lazy singleton — only initializes on first access, not at import time
+// Lazy singleton - only initializes on first access, not at import time
 let _auth: ReturnType<typeof createAuth> | undefined;
 export function getAuth() {
   if (!_auth) _auth = createAuth();

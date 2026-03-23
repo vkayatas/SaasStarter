@@ -10,7 +10,7 @@ interface RouteParams {
   params: Promise<{ id: string }>;
 }
 
-// GET /api/v1/collections/:id/notes — List notes in a collection
+// GET /api/v1/collections/:id/notes - List notes in a collection
 export async function GET(_request: Request, { params }: RouteParams) {
   const { session, error } = await requireSession();
   if (error) return error;
@@ -27,7 +27,7 @@ export async function GET(_request: Request, { params }: RouteParams) {
   return NextResponse.json({ data, meta: { total: data.length } });
 }
 
-// POST /api/v1/collections/:id/notes — Create a note in a collection
+// POST /api/v1/collections/:id/notes - Create a note in a collection
 export async function POST(request: Request, { params }: RouteParams) {
   const { session, error } = await requireSession();
   if (error) return error;

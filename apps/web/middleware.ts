@@ -25,9 +25,9 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  // 3. i18n locale detection — handled by next-intl middleware
-  // 4. Rate limiting (via Upstash Redis — Phase 2)
-  // 5. Security headers — applied via next.config.ts headers()
+  // 3. i18n locale detection - handled by next-intl middleware
+  // 4. Rate limiting (via Upstash Redis - Phase 2)
+  // 5. Security headers - applied via next.config.ts headers()
 
   return NextResponse.next();
 }

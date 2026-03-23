@@ -2,9 +2,9 @@ name: Maintenance
 
 on:
   schedule:
-    # Weekly: Monday 6 AM UTC — dependency updates
+    # Weekly: Monday 6 AM UTC - dependency updates
     - cron: '0 6 * * 1'
-    # Daily: 2 AM UTC — security scan
+    # Daily: 2 AM UTC - security scan
     - cron: '0 2 * * *'
   workflow_dispatch:
 

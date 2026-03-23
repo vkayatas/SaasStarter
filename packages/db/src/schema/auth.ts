@@ -11,7 +11,7 @@ import {
 } from 'drizzle-orm/pg-core';
 
 // ──────────────────────────────────────────────
-// user — core identity (Better-Auth managed)
+// user - core identity (Better-Auth managed)
 // ──────────────────────────────────────────────
 export const user = pgTable('user', {
   id: text('id').primaryKey(),
@@ -29,7 +29,7 @@ export const user = pgTable('user', {
 });
 
 // ──────────────────────────────────────────────
-// session — server-managed sessions
+// session - server-managed sessions
 // ──────────────────────────────────────────────
 export const session = pgTable('session', {
   id: text('id').primaryKey(),
@@ -45,7 +45,7 @@ export const session = pgTable('session', {
 });
 
 // ──────────────────────────────────────────────
-// account — OAuth + credential accounts
+// account - OAuth + credential accounts
 // ──────────────────────────────────────────────
 export const account = pgTable('account', {
   id: text('id').primaryKey(),
@@ -66,7 +66,7 @@ export const account = pgTable('account', {
 });
 
 // ──────────────────────────────────────────────
-// verification — email verification tokens, etc.
+// verification - email verification tokens, etc.
 // ──────────────────────────────────────────────
 export const verification = pgTable('verification', {
   id: text('id').primaryKey(),

@@ -5,7 +5,7 @@ import { createCollectionSchema } from '@/lib/validations/collections';
 
 export const dynamic = 'force-dynamic';
 
-// GET /api/v1/collections — List all collections for the user
+// GET /api/v1/collections - List all collections for the user
 export async function GET() {
   const { session, error } = await requireSession();
   if (error) return error;
@@ -14,7 +14,7 @@ export async function GET() {
   return NextResponse.json({ data, meta: { total: data.length } });
 }
 
-// POST /api/v1/collections — Create a new collection
+// POST /api/v1/collections - Create a new collection
 export async function POST(request: Request) {
   const { session, error } = await requireSession();
   if (error) return error;

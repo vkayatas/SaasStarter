@@ -5,7 +5,7 @@ set -euo pipefail
 # Run once on a fresh Ubuntu 22.04+ server
 # Usage: ssh root@your-server 'bash -s' < deploy/bootstrap.sh
 
-echo "=== SaaS Starter — Server Bootstrap ==="
+echo "=== SaaS Starter - Server Bootstrap ==="
 
 # 1. Create deploy user
 if ! id -u deploy &>/dev/null; then

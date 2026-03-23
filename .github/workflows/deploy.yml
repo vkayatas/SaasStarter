@@ -1,4 +1,4 @@
-name: Deploy — Production
+name: Deploy - Production
 
 on:
   push:
@@ -24,7 +24,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
 
-      # Vercel auto-deploys from main — this is for additional steps
+      # Vercel auto-deploys from main - this is for additional steps
       # - name: Run Migrations
       #   run: pnpm db:migrate
       #   env:

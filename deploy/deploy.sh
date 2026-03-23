@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-# Deploy script — pull, build, migrate, restart
+# Deploy script - pull, build, migrate, restart
 # Usage: ssh deploy@your-server 'cd /opt/saas && bash deploy/deploy.sh'
 
 APP_DIR="/opt/saas"
@@ -36,7 +36,7 @@ sleep 5
 if curl -sf http://localhost:3000/api/v1/health > /dev/null; then
   echo "[deploy] Health check passed ✓"
 else
-  echo "[deploy] Health check FAILED — check logs with: journalctl -u nextjs -n 50"
+  echo "[deploy] Health check FAILED - check logs with: journalctl -u nextjs -n 50"
   exit 1
 fi
 

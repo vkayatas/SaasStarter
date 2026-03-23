@@ -13,7 +13,7 @@ interface RouteParams {
   params: Promise<{ id: string }>;
 }
 
-// GET /api/v1/collections/:id — Get a single collection
+// GET /api/v1/collections/:id - Get a single collection
 export async function GET(_request: Request, { params }: RouteParams) {
   const { session, error } = await requireSession();
   if (error) return error;
@@ -26,7 +26,7 @@ export async function GET(_request: Request, { params }: RouteParams) {
   return NextResponse.json({ data });
 }
 
-// PATCH /api/v1/collections/:id — Update a collection
+// PATCH /api/v1/collections/:id - Update a collection
 export async function PATCH(request: Request, { params }: RouteParams) {
   const { session, error } = await requireSession();
   if (error) return error;
@@ -48,7 +48,7 @@ export async function PATCH(request: Request, { params }: RouteParams) {
   return NextResponse.json({ data });
 }
 
-// DELETE /api/v1/collections/:id — Delete a collection
+// DELETE /api/v1/collections/:id - Delete a collection
 export async function DELETE(_request: Request, { params }: RouteParams) {
   const { session, error } = await requireSession();
   if (error) return error;

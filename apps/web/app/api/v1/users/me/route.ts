@@ -4,7 +4,7 @@ import { auth } from '@/lib/auth';
 
 export const dynamic = 'force-dynamic';
 
-// GET /api/v1/users/me — Get the current user's profile
+// GET /api/v1/users/me - Get the current user's profile
 export async function GET() {
   const session = await auth.api.getSession({
     headers: await headers(),

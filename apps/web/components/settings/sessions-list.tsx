@@ -97,7 +97,7 @@ export function SessionsList() {
     try {
       await authClient.revokeSessions();
       toast.success(t('allSessionsRevoked'));
-      // After revoking all other sessions, refetch — only current session remains
+      // After revoking all other sessions, refetch - only current session remains
       await fetchSessions();
     } catch {
       toast.error(tc('error'));

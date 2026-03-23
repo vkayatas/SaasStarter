@@ -1,6 +1,18 @@
 # SaaS Starter
 
-> A production-ready, fully-featured SaaS starter built with TypeScript everywhere. Includes authentication, CRUD, i18n, dark mode, and a polished dashboard — ready to extend with your own domain logic.
+A open-source starter template for building SaaS applications with TypeScript. Clone this repo, swap in your own domain logic, and you have a working product with authentication, a dashboard, CRUD, i18n, and marketing pages out of the box.
+
+**Who this is for:** Developers who want to skip the boilerplate and start building their product on a solid, modern stack (Next.js 15, PostgreSQL, Drizzle ORM, Turborepo monorepo).
+
+**What you get:**
+- Working login/register with session management (OAuth-ready)
+- Dashboard with sidebar, dark mode, breadcrumbs, mobile nav
+- Example CRUD (Collections + Notes) with React Query
+- Internationalization (English + German, easily extensible)
+- Marketing pages (landing, pricing, blog placeholder)
+- User settings (profile, password, sessions, account deletion)
+- Shared packages for UI, DB, types, and API client
+- Deployment scripts and CI/CD workflows
 
 ---
 
@@ -8,41 +20,41 @@
 
 ### Core Infrastructure
 
-- **Turborepo monorepo** with pnpm workspaces — shared packages for UI, DB, types, API client
+- **Turborepo monorepo** with pnpm workspaces - shared packages for UI, DB, types, API client
 - **Next.js 15** (App Router, Turbopack) with `output: 'standalone'` for easy deployment
-- **PostgreSQL** (Neon serverless) + **Drizzle ORM** — typed schema, migrations, HTTP driver
-- **Better-Auth** — email/password authentication with session management (Google & GitHub OAuth ready)
-- **React Query** — server state management with optimistic updates
-- **Security headers** — HSTS, X-Frame-Options, CSP-ready, nosniff, referrer policy
+- **PostgreSQL** (Neon serverless) + **Drizzle ORM** - typed schema, migrations, HTTP driver
+- **Better-Auth** - email/password authentication with session management (Google & GitHub OAuth ready)
+- **React Query** - server state management with optimistic updates
+- **Security headers** - HSTS, X-Frame-Options, CSP-ready, nosniff, referrer policy
 
 ### Authentication & Sessions
 
 - Login / Register pages with form validation
 - Session-based auth with secure cookies
-- Active sessions list — view device, browser, OS; revoke individual or all sessions
+- Active sessions list - view device, browser, OS; revoke individual or all sessions
 - Auth guard middleware for protected routes
 - Account deletion (danger zone)
 
 ### Dashboard Shell
 
-- **Collapsible sidebar** — persisted state, responsive design
-- **Mobile navigation** — hamburger menu with sheet overlay
-- **Breadcrumbs** — auto-generated from URL pathname
-- **User menu** — avatar, settings link, sign out
-- **Dark / Light / System theme** — toggle button with persisted preference
+- **Collapsible sidebar** - persisted state, responsive design
+- **Mobile navigation** - hamburger menu with sheet overlay
+- **Breadcrumbs** - auto-generated from URL pathname
+- **User menu** - avatar, settings link, sign out
+- **Dark / Light / System theme** - toggle button with persisted preference
 
 ### CRUD Features
 
-- **Collections** — create, rename, delete with inline editing
-- **Notes** — create, edit, delete within collections; supports tags (comma-separated)
+- **Collections** - create, rename, delete with inline editing
+- **Notes** - create, edit, delete within collections; supports tags (comma-separated)
 - All mutations use React Query with toast notifications for success/error feedback
 
 ### Internationalization (i18n)
 
 - **next-intl v4** with cookie-based locale detection
-- **English + German** — fully translated (180+ keys each)
-- Locale switcher in sidebar — instant language change
-- Zero hardcoded strings — all UI text goes through the translation system
+- **English + German** - fully translated (180+ keys each)
+- Locale switcher in sidebar - instant language change
+- Zero hardcoded strings - all UI text goes through the translation system
 - ICU message format support (e.g. `{browser} on {os}`)
 - Server components use `getTranslations()`, client components use `useTranslations()`
 
@@ -55,9 +67,9 @@
 
 ### Settings Page
 
-- **Profile tab** — update name, view email
-- **Security tab** — change password, manage active sessions
-- **Danger zone** — delete account with confirmation
+- **Profile tab** - update name, view email
+- **Security tab** - change password, manage active sessions
+- **Danger zone** - delete account with confirmation
 
 ### Developer Experience
 
@@ -111,7 +123,7 @@ pnpm db:migrate
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) — login and registration work out of the box.
+Open [http://localhost:3000](http://localhost:3000) - login and registration work out of the box.
 
 ---
 
@@ -127,8 +139,8 @@ Open [http://localhost:3000](http://localhost:3000) — login and registration w
 | **i18n** | next-intl v4 (EN + DE) |
 | **Theme** | next-themes (dark/light/system) |
 | **Monorepo** | Turborepo + pnpm workspaces |
-| **Mobile** | Expo (React Native) — Phase 3 |
-| **Desktop** | Tauri v2 — Phase 4 |
+| **Mobile** | Expo (React Native) - Phase 3 |
+| **Desktop** | Tauri v2 - Phase 4 |
 
 ---
 
@@ -189,7 +201,7 @@ tooling/
 
 ---
 
-## How to Continue — Project-Specific Customization
+## How to Continue - Project-Specific Customization
 
 This starter gives you a working SaaS shell. Here's how to make it yours:
 
@@ -236,7 +248,7 @@ Google and GitHub OAuth are scaffolded but require credentials:
 ### 5. Add new dashboard pages
 
 1. Create a folder under `apps/web/app/(dashboard)/dashboard/your-feature/`
-2. Add a `page.tsx` — it's automatically protected by the dashboard layout
+2. Add a `page.tsx` - it's automatically protected by the dashboard layout
 3. Add a sidebar link in `apps/web/components/sidebar.tsx`
 4. Add i18n keys for the new page
 
@@ -244,27 +256,27 @@ Google and GitHub OAuth are scaffolded but require credentials:
 
 - Edit `apps/web/app/(marketing)/page.tsx` for the landing page
 - Edit `apps/web/app/(marketing)/pricing/page.tsx` for pricing tiers
-- Add new pages under `(marketing)/` — they share the marketing header/footer layout
+- Add new pages under `(marketing)/` - they share the marketing header/footer layout
 
 ### 7. Deploy
 
 The app uses `output: 'standalone'` and is ready for:
 
-- **Vercel** — zero config, just connect the repo
-- **Docker** — use the Next.js standalone output (`node server.js`)
-- **VPS** — build + `node apps/web/.next/standalone/server.js`
+- **Vercel** - zero config, just connect the repo
+- **Docker** - use the Next.js standalone output (`node server.js`)
+- **VPS** - build + `node apps/web/.next/standalone/server.js`
 
 ### 8. Roadmap placeholders (not yet implemented)
 
 These are scaffolded but not yet wired:
 
-- **Sharing system** — `resourceShares` + `shareInvites` tables exist in the DB schema
-- **Stripe billing** — pricing page exists, payment integration not wired
-- **Email (Resend)** — env var placeholder exists, transactional emails not implemented
-- **Rate limiting (Upstash Redis)** — env var placeholder exists, middleware not wired
-- **Mobile app** — Expo workspace exists, not started
-- **Desktop app** — Tauri workspace exists, not started
-- **Admin dashboard** — `ADMIN_EMAILS` env var exists, admin UI not built
+- **Sharing system** - `resourceShares` + `shareInvites` tables exist in the DB schema
+- **Stripe billing** - pricing page exists, payment integration not wired
+- **Email (Resend)** - env var placeholder exists, transactional emails not implemented
+- **Rate limiting (Upstash Redis)** - env var placeholder exists, middleware not wired
+- **Mobile app** - Expo workspace exists, not started
+- **Desktop app** - Tauri workspace exists, not started
+- **Admin dashboard** - `ADMIN_EMAILS` env var exists, admin UI not built
 
 ---
 
@@ -273,7 +285,7 @@ These are scaffolded but not yet wired:
 | Variable | Required | Description |
 |----------|----------|-------------|
 | `DATABASE_URL` | Yes | Neon PostgreSQL connection string |
-| `BETTER_AUTH_SECRET` | Yes | Auth secret (min 32 chars) — `openssl rand -base64 32` |
+| `BETTER_AUTH_SECRET` | Yes | Auth secret (min 32 chars) - `openssl rand -base64 32` |
 | `BETTER_AUTH_URL` | Yes | App URL (`http://localhost:3000` for dev) |
 | `NEXT_PUBLIC_APP_URL` | Yes | Public app URL (same as above) |
 | `GOOGLE_CLIENT_ID` | No | Google OAuth client ID |

@@ -25,7 +25,7 @@ export async function serverFetch<T>(path: string, options?: RequestInit): Promi
 }
 
 /**
- * Startup checks — called from instrumentation.ts
+ * Startup checks - called from instrumentation.ts
  */
 export async function runStartupChecks() {
   const env = config.NODE_ENV;

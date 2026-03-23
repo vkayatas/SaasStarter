@@ -72,7 +72,7 @@ export function Sidebar() {
         })}
       </nav>
 
-      {/* Footer — toggle, theme, locale */}
+      {/* Footer - toggle, theme, locale */}
       <div className={`border-t p-2 ${collapsed ? 'space-y-1' : 'space-y-2'}`}>
         {/* Locale */}
         <div className={collapsed ? 'flex justify-center' : 'px-1'}>

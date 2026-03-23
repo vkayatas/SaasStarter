@@ -2,7 +2,7 @@ import { neon } from '@neondatabase/serverless';
 import { drizzle, type NeonHttpDatabase } from 'drizzle-orm/neon-http';
 import * as schema from './schema';
 
-// Lazy singleton — avoids crashing at import time when DATABASE_URL is absent
+// Lazy singleton - avoids crashing at import time when DATABASE_URL is absent
 // (e.g. during `next build` static analysis).
 let _db: NeonHttpDatabase<typeof schema> | undefined;
 
