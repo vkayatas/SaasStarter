@@ -165,6 +165,10 @@
     "goHome": "Zur Startseite"
   },
   "blog": {
+    "title": "Blog",
+    "subtitle": "Neuigkeiten, Anleitungen und Updates von unserem Team.",
+    "noPosts": "Noch keine Beiträge. Schau bald wieder vorbei!",
+    "backToList": "Zurück zum Blog",
     "placeholder": "Blogbeitrag-Inhalt folgt hier."
   }
 }

@@ -1,4 +1,4 @@
-# ImmoApp — Product Specification
+# ImmoApp - Product Specification
 
 > A real estate investment portfolio tracker for private landlords and property investors. Track properties, cashflows, returns, and never miss an important deadline.
 
@@ -6,7 +6,7 @@
 
 ## Vision
 
-ImmoApp helps property investors manage their portfolio with clarity. See all your properties in one place, understand your real returns, track every euro in and out, and get reminded about important dates — without connecting to banks or generating contracts.
+ImmoApp helps property investors manage their portfolio with clarity. See all your properties in one place, understand your real returns, track every euro in and out, and get reminded about important dates - without connecting to banks or generating contracts.
 
 **What it is:** A portfolio dashboard for real estate investors.
 **What it is not:** A banking app, a contract generator, or a tenant portal.
@@ -42,7 +42,7 @@ Investor (User)
               ├── Transactions (Buchungen)
               │     ├── Income (Mieteinnahmen, Sonderzahlungen)
               │     └── Expenses (Hausgeld, Reparaturen, Versicherung, Grundsteuer, ...)
-              ├── Documents (Dokumente) — file uploads (photos, PDFs)
+              ├── Documents (Dokumente) - file uploads (photos, PDFs)
               └── Events (Termine / Fristen)
                     ├── Recurring (e.g. Nebenkostenabrechnung deadline)
                     ├── One-time (e.g. Grundsteuer payment)
@@ -115,24 +115,24 @@ Key Metrics (calculated, not stored):
 | recurrenceInterval | enum | `monthly`, `quarterly`, `yearly` (if recurring) |
 
 **Income categories:**
-- `rent` — Mieteinnahme
-- `utilities_settlement` — Nebenkostenrückzahlung
-- `deposit` — Kautionseinzahlung
-- `other_income` — Sonstige Einnahmen
+- `rent` - Mieteinnahme
+- `utilities_settlement` - Nebenkostenrückzahlung
+- `deposit` - Kautionseinzahlung
+- `other_income` - Sonstige Einnahmen
 
 **Expense categories:**
-- `hausgeld` — Hausgeld / WEG-Verwaltung
-- `property_tax` — Grundsteuer
-- `insurance` — Versicherungen
-- `maintenance` — Instandhaltung / Reparaturen
-- `utilities` — Nebenkosten / Betriebskosten
-- `management_fee` — Verwaltungskosten
-- `mortgage_interest` — Darlehenszinsen (tracking only, no bank connection)
-- `mortgage_principal` — Tilgung (tracking only)
-- `depreciation` — AfA (Abschreibung)
-- `vacancy_costs` — Leerstandskosten
-- `legal` — Rechtskosten
-- `other_expense` — Sonstige Ausgaben
+- `hausgeld` - Hausgeld / WEG-Verwaltung
+- `property_tax` - Grundsteuer
+- `insurance` - Versicherungen
+- `maintenance` - Instandhaltung / Reparaturen
+- `utilities` - Nebenkosten / Betriebskosten
+- `management_fee` - Verwaltungskosten
+- `mortgage_interest` - Darlehenszinsen (tracking only, no bank connection)
+- `mortgage_principal` - Tilgung (tracking only)
+- `depreciation` - AfA (Abschreibung)
+- `vacancy_costs` - Leerstandskosten
+- `legal` - Rechtskosten
+- `other_expense` - Sonstige Ausgaben
 
 #### Event (Termin / Frist)
 
@@ -147,43 +147,43 @@ Key Metrics (calculated, not stored):
 | notes | text | Additional details |
 
 **Event types (Terminarten):**
-- `nebenkostenabrechnung` — Nebenkostenabrechnung erstellen (annual, due by Dec 31)
-- `tax_declaration` — Steuererklärung / Anlage V
-- `property_tax_payment` — Grundsteuer-Zahlung (quarterly)
-- `insurance_renewal` — Versicherung prüfen/erneuern
-- `rent_increase` — Mieterhöhung möglich (Mietspiegel check)
-- `lease_end` — Mietvertrag läuft aus
-- `maintenance_scheduled` — Geplante Instandhaltung
-- `hausgeld_review` — Hausgeld-Abrechnung prüfen
-- `property_valuation` — Marktwert neu bewerten
-- `custom` — Benutzerdefiniert
+- `nebenkostenabrechnung` - Nebenkostenabrechnung erstellen (annual, due by Dec 31)
+- `tax_declaration` - Steuererklärung / Anlage V
+- `property_tax_payment` - Grundsteuer-Zahlung (quarterly)
+- `insurance_renewal` - Versicherung prüfen/erneuern
+- `rent_increase` - Mieterhöhung möglich (Mietspiegel check)
+- `lease_end` - Mietvertrag läuft aus
+- `maintenance_scheduled` - Geplante Instandhaltung
+- `hausgeld_review` - Hausgeld-Abrechnung prüfen
+- `property_valuation` - Marktwert neu bewerten
+- `custom` - Benutzerdefiniert
 
 ---
 
-## Features — Full Specification
+## Features - Full Specification
 
 ### Phase 1: Portfolio Foundation (MVP)
 
-#### F1.1 — Property Management
+#### F1.1 - Property Management
 - CRUD for properties with all fields above
 - Property detail page with summary card (address, value, yield, cashflow)
 - Property list with search, filter by type, sort by value/yield
 - Property photo upload (single main image)
 
-#### F1.2 — Unit Management
+#### F1.2 - Unit Management
 - CRUD for units within a property
 - Unit list on property detail page
 - Status indicator (occupied / vacant / renovation / owner use)
 - Quick overview: area, rooms, floor, current tenant, current rent
 
-#### F1.3 — Tenancy Tracking
+#### F1.3 - Tenancy Tracking
 - CRUD for tenancies within a unit
 - Current + historical tenancies (timeline view)
 - Rent amount tracking (Kaltmiete / Nebenkosten / Warmmiete)
 - Vacancy period tracking (gaps between tenancies)
 - Rent adjustment history (Mietanpassungen)
 
-#### F1.4 — Transaction Tracking (Cashflow)
+#### F1.4 - Transaction Tracking (Cashflow)
 - CRUD for income and expense transactions per property
 - Categorized with predefined categories (see above)
 - Monthly / yearly aggregation
@@ -191,7 +191,7 @@ Key Metrics (calculated, not stored):
 - Bulk entry: quick-add for multiple months of the same transaction
 - Filter by property, category, date range, type
 
-#### F1.5 — Dashboard (Portfolio Overview)
+#### F1.5 - Dashboard (Portfolio Overview)
 - Total portfolio value (sum of all property `currentValue`)
 - Total monthly cashflow (income − expenses)
 - Total vacancy rate
@@ -201,7 +201,7 @@ Key Metrics (calculated, not stored):
 
 ### Phase 2: Analytics & Metrics
 
-#### F2.1 — Property Analytics
+#### F2.1 - Property Analytics
 - Per-property cashflow chart (monthly bar chart, income vs expenses)
 - Yield calculation:
   - **Bruttorendite** = (annual Kaltmiete / purchase price) × 100
@@ -211,14 +211,14 @@ Key Metrics (calculated, not stored):
 - Occupancy rate (occupied months / total months)
 - Rent per m² comparison
 
-#### F2.2 — Portfolio Analytics
+#### F2.2 - Portfolio Analytics
 - Portfolio value over time (line chart)
 - Monthly cashflow trend (all properties combined)
 - Best/worst performing properties
 - Diversification view (by type, location)
 - Year-over-year comparison
 
-#### F2.3 — Nebenkostenabrechnung Helper
+#### F2.3 - Nebenkostenabrechnung Helper
 - Annual utility cost calculation per unit
 - Actual costs vs. advance payments (Vorauszahlungen)
 - Per-tenant settlement amount (Nachzahlung / Guthaben)
@@ -226,13 +226,13 @@ Key Metrics (calculated, not stored):
 
 ### Phase 3: Events & Reminders
 
-#### F3.1 — Event Calendar
+#### F3.1 - Event Calendar
 - Calendar view of all upcoming events
 - List view with filtering by type, property, status
 - Color-coded by type and urgency
 - Overdue event highlighting
 
-#### F3.2 — Reminders
+#### F3.2 - Reminders
 - In-app notification banner for upcoming events
 - Email reminders (when Resend is configured)
 - Auto-generate recurring events:
@@ -240,20 +240,20 @@ Key Metrics (calculated, not stored):
   - Grundsteuer (quarterly)
   - Insurance renewal (annually)
 
-#### F3.3 — Smart Suggestions
-- "Rent increase possible" — when 15 months since last increase (§558 BGB)
-- "Nebenkostenabrechnung overdue" — when past Dec 31 deadline
-- "Vacancy alert" — when a unit has been vacant > 30 days
+#### F3.3 - Smart Suggestions
+- "Rent increase possible" - when 15 months since last increase (§558 BGB)
+- "Nebenkostenabrechnung overdue" - when past Dec 31 deadline
+- "Vacancy alert" - when a unit has been vacant > 30 days
 
 ### Phase 4: Documents & Reports
 
-#### F4.1 — Document Management
+#### F4.1 - Document Management
 - Upload PDFs, images per property or unit
 - Categorize: contract, photo, invoice, insurance, tax, other
 - Simple file list with download
-- No preview needed — just storage and organization
+- No preview needed - just storage and organization
 
-#### F4.2 — Export / Reports
+#### F4.2 - Export / Reports
 - CSV export: transactions, properties, units
 - Annual summary report per property (PDF)
 - Tax helper: Anlage V data compilation (income + deductible expenses)
@@ -261,16 +261,16 @@ Key Metrics (calculated, not stored):
 
 ### Phase 5: Advanced Features
 
-#### F5.1 — Advisor Sharing
+#### F5.1 - Advisor Sharing
 - Share portfolio read-only with tax advisor via invite link
 - Uses existing `resource_shares` + `share_invites` DB tables
-- Advisor sees properties, transactions, reports — cannot edit
+- Advisor sees properties, transactions, reports - cannot edit
 
-#### F5.2 — Multi-Currency (optional)
+#### F5.2 - Multi-Currency (optional)
 - Support for properties in different countries/currencies
 - Exchange rate for portfolio totalssummary
 
-#### F5.3 — Goal Tracking
+#### F5.3 - Goal Tracking
 - Set financial goals (e.g. "€5,000/month passive income")
 - Progress visualization
 - Projected timeline based on current growth
@@ -281,36 +281,36 @@ Key Metrics (calculated, not stored):
 
 ```
 / (Marketing)
-├── Landing page — hero, features, pricing
-├── /pricing — plan tiers
-└── /blog — content marketing
+├── Landing page - hero, features, pricing
+├── /pricing - plan tiers
+└── /blog - content marketing
 
 /dashboard
-├── Overview — portfolio summary, stats, charts, upcoming events
+├── Overview - portfolio summary, stats, charts, upcoming events
 ├── /properties
-│     ├── List — all properties, search/filter/sort
-│     └── /[id] — property detail
-│           ├── Overview tab — key metrics, value, yield
-│           ├── Units tab — unit list, tenancy info
-│           ├── Cashflow tab — transactions, charts
-│           ├── Events tab — deadlines for this property
-│           └── Documents tab — file uploads
-├── /cashflow — global transaction view across all properties
-├── /calendar — all events, deadlines, reminders
-├── /reports — analytics, charts, exports
-└── /settings — profile, security, preferences
+│     ├── List - all properties, search/filter/sort
+│     └── /[id] - property detail
+│           ├── Overview tab - key metrics, value, yield
+│           ├── Units tab - unit list, tenancy info
+│           ├── Cashflow tab - transactions, charts
+│           ├── Events tab - deadlines for this property
+│           └── Documents tab - file uploads
+├── /cashflow - global transaction view across all properties
+├── /calendar - all events, deadlines, reminders
+├── /reports - analytics, charts, exports
+└── /settings - profile, security, preferences
 ```
 
 ---
 
 ## Data Privacy & Security Principles
 
-- **No bank connections** — all financial data is manually entered
-- **No sensitive tenant data** — only name for display, no ID numbers or bank details
-- **No contract generation** — the app is a tracker, not a legal tool
-- **User owns their data** — full export capability (CSV)
-- **Minimal PII** — only user email + name for auth; tenant names stored but no further personal data
-- **GDPR compliant** — account deletion removes all data (already implemented)
+- **No bank connections** - all financial data is manually entered
+- **No sensitive tenant data** - only name for display, no ID numbers or bank details
+- **No contract generation** - the app is a tracker, not a legal tool
+- **User owns their data** - full export capability (CSV)
+- **Minimal PII** - only user email + name for auth; tenant names stored but no further personal data
+- **GDPR compliant** - account deletion removes all data (already implemented)
 
 ---
 
@@ -321,13 +321,13 @@ Key Metrics (calculated, not stored):
 Replace the generic `collections` + `notes` tables with:
 
 ```
-properties        — Property/Immobilie
-units             — Units within a property
-tenancies         — Tenant periods per unit
-transactions      — Income/expense records
-events            — Deadlines and reminders
-documents         — File metadata (storage TBD)
-rent_adjustments  — Mietanpassung history
+properties        - Property/Immobilie
+units             - Units within a property
+tenancies         - Tenant periods per unit
+transactions      - Income/expense records
+events            - Deadlines and reminders
+documents         - File metadata (storage TBD)
+rent_adjustments  - Mietanpassung history
 ```
 
 Keep existing: `user`, `session`, `account`, `verification`, `resource_shares`, `share_invites`
@@ -335,15 +335,15 @@ Keep existing: `user`, `session`, `account`, `verification`, `resource_shares`, 
 ### i18n Additions
 
 Extend `en.json` and `de.json` with domain-specific namespaces:
-- `properties` — property-related labels
-- `units` — unit-related labels
-- `tenancies` — tenancy/tenant labels
-- `transactions` — income/expense categories and labels
-- `events` — event types and calendar labels
-- `reports` — analytics and export labels
-- `cashflow` — financial metric labels
+- `properties` - property-related labels
+- `units` - unit-related labels
+- `tenancies` - tenancy/tenant labels
+- `transactions` - income/expense categories and labels
+- `events` - event types and calendar labels
+- `reports` - analytics and export labels
+- `cashflow` - financial metric labels
 
-German terminology is critical — users will expect proper German real estate vocabulary (Kaltmiete, Warmmiete, Hausgeld, Nebenkosten, etc.).
+German terminology is critical - users will expect proper German real estate vocabulary (Kaltmiete, Warmmiete, Hausgeld, Nebenkosten, etc.).
 
 ### File Storage
 
@@ -379,10 +379,10 @@ The starter's Collections + Notes serve as a **working reference** for the CRUD 
 
 | Milestone | Features | Target |
 |-----------|----------|--------|
-| **M1 — Property CRUD** | Properties, units, basic detail pages | Week 1–2 |
-| **M2 — Tenancy & Rent** | Tenancies, rent tracking, vacancy | Week 3–4 |
-| **M3 — Cashflow** | Transactions, categories, recurring, monthly view | Week 5–6 |
-| **M4 — Dashboard Metrics** | Portfolio overview, yields, charts | Week 7–8 |
-| **M5 — Events & Calendar** | Events, reminders, Nebenkostenabrechnung helper | Week 9–10 |
-| **M6 — Documents & Export** | File uploads, CSV export, reports | Week 11–12 |
-| **M7 — Polish & Launch** | Onboarding, mobile responsiveness, performance | Week 13–14 |
+| **M1 - Property CRUD** | Properties, units, basic detail pages | Week 1–2 |
+| **M2 - Tenancy & Rent** | Tenancies, rent tracking, vacancy | Week 3–4 |
+| **M3 - Cashflow** | Transactions, categories, recurring, monthly view | Week 5–6 |
+| **M4 - Dashboard Metrics** | Portfolio overview, yields, charts | Week 7–8 |
+| **M5 - Events & Calendar** | Events, reminders, Nebenkostenabrechnung helper | Week 9–10 |
+| **M6 - Documents & Export** | File uploads, CSV export, reports | Week 11–12 |
+| **M7 - Polish & Launch** | Onboarding, mobile responsiveness, performance | Week 13–14 |

@@ -21,7 +21,19 @@ function createAuth() {
       : [process.env.NEXT_PUBLIC_APP_URL ?? ''],
     emailAndPassword: {
       enabled: true,
-      requireEmailVerification: false, // flip to true once SMTP is wired
+      requireEmailVerification: !!process.env.RESEND_API_KEY,
+      sendVerificationEmail: process.env.RESEND_API_KEY
+        ? async ({ user, url }) => {
+            const { Resend } = await import('resend');
+            const resend = new Resend(process.env.RESEND_API_KEY);
+            await resend.emails.send({
+              from: process.env.EMAIL_FROM ?? 'noreply@example.com',
+              to: user.email,
+              subject: 'Verify your email address',
+              html: `<p>Click <a href="${url}">here</a> to verify your email address.</p>`,
+            });
+          }
+        : undefined,
     },
     socialProviders: {
       ...(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET

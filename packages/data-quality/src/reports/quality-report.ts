@@ -12,8 +12,11 @@ export interface QualityReport {
   };
 }
 
-export function generateQualityReport(): QualityReport {
-  const checks = [checkOrphanedRecords(), checkSchemaConsistency()];
+export async function generateQualityReport(): Promise<QualityReport> {
+  const checks = await Promise.all([
+    checkOrphanedRecords(),
+    checkSchemaConsistency(),
+  ]);
 
   return {
     timestamp: new Date().toISOString(),

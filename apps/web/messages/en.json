@@ -165,6 +165,10 @@
     "goHome": "Go home"
   },
   "blog": {
+    "title": "Blog",
+    "subtitle": "News, guides, and updates from our team.",
+    "noPosts": "No posts yet. Check back soon!",
+    "backToList": "Back to blog",
     "placeholder": "Blog post content goes here."
   }
 }

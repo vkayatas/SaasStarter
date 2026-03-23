@@ -1,4 +1,6 @@
 import { config } from './config';
+import { db } from '@saas/db';
+import { sql } from 'drizzle-orm';
 
 /**
  * Server-side API helper for making internal API requests.
@@ -31,7 +33,7 @@ export async function runStartupChecks() {
   const env = config.NODE_ENV;
 
   // 1. Fail-fast on dangerous config in real-data environments
-  if (env !== 'development') {
+  if (env !== 'development' && env !== 'test') {
     if (config.CORS_ORIGINS.includes('*')) {
       throw new Error('Wildcard CORS origin (*) is not allowed in staging/production');
     }
@@ -40,19 +42,12 @@ export async function runStartupChecks() {
     }
   }
 
-  // 2. Database connectivity check (when DB is configured)
-  // TODO: Uncomment when DB package is wired up
-  // await db.execute(sql`SELECT 1`);
-
-  // 3. Schema migration check (when migrations are configured)
-  // TODO: Uncomment when migration versioning is in place
-  // if (env !== 'development') {
-  //   const applied = await getAppliedMigrationVersion();
-  //   const expected = getExpectedMigrationVersion();
-  //   if (applied !== expected) {
-  //     throw new Error(`DB schema mismatch: applied=${applied}, expected=${expected}`);
-  //   }
-  // }
+  // 2. Database connectivity check
+  try {
+    await db.execute(sql`SELECT 1`);
+  } catch (e) {
+    throw new Error(`Database connectivity check failed: ${e instanceof Error ? e.message : e}`);
+  }
 
   console.log(`[startup] All checks passed (env=${env})`);
 }

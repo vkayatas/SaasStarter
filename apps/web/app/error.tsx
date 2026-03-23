@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { useTranslations } from 'next-intl';
+import * as Sentry from '@sentry/nextjs';
 
 export default function GlobalError({
   error,
@@ -13,7 +14,7 @@ export default function GlobalError({
   const t = useTranslations('common');
 
   useEffect(() => {
-    // TODO: Log to Sentry
+    Sentry.captureException(error);
     console.error(error);
   }, [error]);
 

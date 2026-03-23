@@ -1,0 +1,11 @@
+node_modules
+.git
+.github
+.next
+.env*
+!.env.example
+*.md
+docs/
+deploy/
+**/*.test.ts
+**/*.spec.ts
